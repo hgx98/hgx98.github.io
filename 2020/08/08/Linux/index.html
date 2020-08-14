@@ -1,0 +1,1442 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Linux基础篇Linux介绍 Linux是一款操作系统，免费、开源、安全、高效、稳定、处理高并发非常强悍，现在很多企业级的项目都部署到Linux或者是Unix服务器运行。 Linux创始人：LInus Torvalds  Linux目录结构Linux的文件系统是采用层式的树状目录结构，在此结构中的最上层是根目录 “&#x2F;“，然后再次目录下再创建其他目录。具体的目录结构如下：  &#x2F;bin：是Bianr">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux">
+<meta property="og:url" content="http://yoursite.com/2020/08/08/Linux/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Linux基础篇Linux介绍 Linux是一款操作系统，免费、开源、安全、高效、稳定、处理高并发非常强悍，现在很多企业级的项目都部署到Linux或者是Unix服务器运行。 Linux创始人：LInus Torvalds  Linux目录结构Linux的文件系统是采用层式的树状目录结构，在此结构中的最上层是根目录 “&#x2F;“，然后再次目录下再创建其他目录。具体的目录结构如下：  &#x2F;bin：是Bianr">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://yoursite.com/2020/08/08/Linux/image-20200808222725199.png">
+<meta property="og:image" content="http://yoursite.com/2020/08/08/Linux/image-20200808223357892.png">
+<meta property="og:image" content="http://yoursite.com/2020/08/08/Linux/image-20200808223744797.png">
+<meta property="og:image" content="http://yoursite.com/2020/08/08/Linux/image-20200809163626183.png">
+<meta property="og:image" content="http://yoursite.com/2020/08/08/Linux/image-20200809212944570.png">
+<meta property="og:image" content="http://yoursite.com/2020/08/08/Linux/image-20200809225342317.png">
+<meta property="og:image" content="http://yoursite.com/2020/08/08/Linux/image-20200809225637315.png">
+<meta property="og:image" content="http://yoursite.com/2020/08/08/Linux/image-20200809232409342.png">
+<meta property="og:image" content="http://yoursite.com/2020/08/08/Linux/image-20200809233751229.png">
+<meta property="og:image" content="http://yoursite.com/2020/08/08/Linux/image-20200809234557559.png">
+<meta property="og:image" content="http://yoursite.com/2020/08/08/Linux/image-20200809235606426.png">
+<meta property="og:image" content="http://yoursite.com/2020/08/08/Linux/image-20200809235750775.png">
+<meta property="article:published_time" content="2020-08-08T08:33:01.000Z">
+<meta property="article:modified_time" content="2020-08-09T16:25:15.668Z">
+<meta property="article:author" content="hgx98">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/2020/08/08/Linux/image-20200808222725199.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/08/08/Linux/"/>
+
+
+
+
+
+  <title>Linux | Hexo</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/08/Linux/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="hgx98">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Linux</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-08-08T16:33:01+08:00">
+                2020-08-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Linux基础篇"><a href="#Linux基础篇" class="headerlink" title="Linux基础篇"></a>Linux基础篇</h1><h2 id="Linux介绍"><a href="#Linux介绍" class="headerlink" title="Linux介绍"></a>Linux介绍</h2><ol>
+<li>Linux是一款操作系统，免费、开源、安全、高效、稳定、处理高并发非常强悍，现在很多企业级的项目都部署到Linux或者是Unix服务器运行。</li>
+<li>Linux创始人：LInus Torvalds</li>
+</ol>
+<h2 id="Linux目录结构"><a href="#Linux目录结构" class="headerlink" title="Linux目录结构"></a>Linux目录结构</h2><p>Linux的文件系统是采用层式的树状目录结构，在此结构中的最上层是根目录 “/“，然后再次目录下再创建其他目录。具体的目录结构如下：</p>
+<ul>
+<li>/bin：是Bianry的缩写，这个目录存放着经常使用的命令</li>
+<li>/sbin：s，Super User，这里存放的是系统管理员使用的系统管理程序</li>
+<li>/home：存放普通用户的主目录，在Linux中每个用户都有一个自己的目录，一般该目录名是以用户的账号命名的。</li>
+<li>/root：该目录为系统管理员，也称超级权限者的用户主目录</li>
+<li>/boot：存放的是启动Linux时使用的一些核心文件，包括一些链接文件以及镜像文件</li>
+<li>/proc：这个目录是一个虚拟的目录，它是系统内存的映射，访问这个目录来获取系统信息</li>
+<li>/srv：service的缩写，该目录存放一些服务启动之后需要提取的数据</li>
+<li>/sys：这是Linux2.6内核的一个很大的变化，该目录下安装了2.6内核中新出现的一个文件系统</li>
+<li>/tmp：这个目录用来存放一些临时文件</li>
+<li>/dev：类似于Windows的设备管理器，把所有的硬件用文件的形式存储</li>
+<li>/media：Linux系统会自动识别一些设备，例如U盘、光驱等等，当识别后，Linux会把识别的设备挂载到这个目录下</li>
+<li>/mnt：系统提供该目录是为了让用户临时挂载别的文件系统的，我们可以将外部的存储挂载到/mnt/上，然后进入该目录就可以查看里面的内容了</li>
+<li>/opt：这是给主机额外安装软件所摆放的位置。如安装Oracle数据库就可以放到该目录下，默认为空</li>
+<li>/usr/local：这是给另一个主机额外安装软件所安装的目录，一般是通过编译源码方式安装的程序</li>
+<li>/var：这个目录中存放着在不断扩充着的东西，习惯将经常被修改的目录放在这个目录下。包括各种日志文件</li>
+<li>/selinux：安全子系统，它能控制程序只能访问特定文件</li>
+</ul>
+<h1 id="Linux实操篇"><a href="#Linux实操篇" class="headerlink" title="Linux实操篇"></a>Linux实操篇</h1><h2 id="远程登录Linux系统"><a href="#远程登录Linux系统" class="headerlink" title="远程登录Linux系统"></a>远程登录Linux系统</h2><p>远程登录Linux系统需要用到xshell，最新版本为xshell6。xshell是一个强大的安全终端软件，它支持SSH1，SSH2，一级Microsoft Windows平台的TELNET协议。xshell可以在Windows界面下用来访问远端不同系统下的服务器，从而比较好的达到远程控制终端的目的。xshell完美解决了中文乱码问题。</p>
+<p>如果要使用xshell连接Linux，首先需要保证Linux启用了SSHD服务。</p>
+<ol>
+<li><p>在Linux终端下，输入命令：</p>
+<blockquote>
+<p>ps -e|grep sshd</p>
+</blockquote>
+</li>
+</ol>
+<p><img src="/2020/08/08/Linux/image-20200808222725199.png" alt="image-20200808222725199"></p>
+<ol start="2">
+<li><p>如果没有以上显示的话，需要进行下载：</p>
+<blockquote>
+<p>sudo apt-get install openssh-server</p>
+</blockquote>
+</li>
+<li><p>下载完成后，开始准备连接，首先查看Linux服务器的IP地址：</p>
+<blockquote>
+<p>ifconfig </p>
+</blockquote>
+<p> 如果无法查看，则先下载net-tools</p>
+<blockquote>
+<p>sudo apt-get install net-tools</p>
+</blockquote>
+<p> 再次查看，ens下的inet就是Linux的IP地址</p>
+</li>
+<li><p>打开Xshell，新建连接<br> <img src="/2020/08/08/Linux/image-20200808223357892.png" alt="image-20200808223357892"></p>
+</li>
+<li><p>第一次连接时，会弹出未知的秘钥警告，选择接受并保存。然后输入Linux的用户名和密码。<br> 如果此处出现  “SSH服务器拒绝了密码，请再试一次”，则先到Linux的终端，输入</p>
+<blockquote>
+<p>cd /etc/ssh/</p>
+</blockquote>
+<p> 进入到/etc/ssh/文件夹，然后输入</p>
+<blockquote>
+<p>vim sshd_config</p>
+</blockquote>
+<p> 如果提示没有安装vim，则先安装vim</p>
+<blockquote>
+<p>sudo apt-get install vim</p>
+</blockquote>
+<p> 重新输入</p>
+<blockquote>
+<p>vim sshd_config</p>
+</blockquote>
+<p> 找到</p>
+<p> <img src="/2020/08/08/Linux/image-20200808223744797.png" alt="image-20200808223744797"></p>
+<p> 将PermitRootLogin后面的字符串改为 yes。重新连接Xshell。</p>
+</li>
+</ol>
+<h2 id="vi和vim编辑器"><a href="#vi和vim编辑器" class="headerlink" title="vi和vim编辑器"></a>vi和vim编辑器</h2><p>所有的Linux系统都会内建vi文本编辑器。</p>
+<p>vim具有程序编辑的能力，可以看做是vi的增强版本，可以主动地以字体颜色辨别语法的正确性，方便程序设计。</p>
+<p><strong>vi和vim常用的三种模式：</strong></p>
+<ol>
+<li>正常模式<br> 以vim打开一个档案就直接进入一般模式了。在该模式中，可以使用上下左右按键来移动光标，可以使用删除字符或删除整行来处理档案内容，也可以使用复制粘贴来处理文件数据。</li>
+<li>插入/编辑模式<br> 按下i、I、o、O、a、A、r、R等任何一个字母之后才会进入编辑模式，一般来说按i即可。</li>
+<li>命令行模式<br> 在该模式下，可以提供相关指令，完成读取、存盘、替换、离开vim、显示行号等动作。</li>
+</ol>
+<p><strong>vi和vim快捷键：</strong></p>
+<ol>
+<li>拷贝当前行：yy<br> 拷贝当前行向下的5行：5yy，并粘贴</li>
+<li>删除当前行：dd<br> 删除当前行向下的5行：5dd</li>
+<li>在文件中查找某个单词：<br> 命令行下：/关键字<br> 回车：查找<br> 输入n：查找下一个</li>
+<li>设置文件的行号，取消文件的行号：<br> <strong>命令行下</strong>：set nu   /   set nonu</li>
+<li>编辑/etc/profile文件，使用快捷键到文档的最末行：G<br> 到达首行：gg<br> 注意：在正常模式下输入</li>
+<li>在一个文件中输入”hello”，然后又撤销这个动作：u</li>
+<li>编辑/etc/profile文件，并将光标移动到20行：<br> 显示行号：set nu<br> 输入20<br> 输入 shift + g</li>
+</ol>
+<h2 id="关机重启注销"><a href="#关机重启注销" class="headerlink" title="关机重启注销"></a>关机重启注销</h2><p><strong>关机&amp;重启命令：</strong></p>
+<ul>
+<li><p>shutdown：</p>
+<blockquote>
+<p>shutdown -h now：表示立即关机</p>
+<p>shutdown -h 1：表示1分钟后关机</p>
+<p>shutdown -r now：立即重启</p>
+</blockquote>
+</li>
+<li><p>halt：直接使用，效果等价于关机</p>
+</li>
+<li><p>reboot：现在重新启动计算机</p>
+</li>
+<li><p>sync：把内存的数据同步到磁盘</p>
+</li>
+</ul>
+<p><strong>用户登录和注销：</strong></p>
+<p>基本介绍：</p>
+<ol>
+<li>登录时尽量少使用root账号登录，因为它是系统管理员，最大的权限，避免操作失误。可以利用普通用户登录，登录后再用sudo su命令切换成系统管理员身份。</li>
+<li>在提示符下输入logout即可注销用户。<br> logout注销指令在图形运行级别无效，在运行级别3下有效。</li>
+</ol>
+<h2 id="用户管理"><a href="#用户管理" class="headerlink" title="用户管理"></a>用户管理</h2><p>Linux系统是一个多用户多任务的操作系统，任何一个要使用系统资源的用户都必须先向系统管理员申请一个账号，然后以这个账号的身份进入系统。Linux的用户需要至少属于一个组。</p>
+<p><strong>添加用户：</strong></p>
+<blockquote>
+<p>useradd [选项] 用户名</p>
+</blockquote>
+<ol>
+<li><p>当创建用户成功后，如果选项没有填写，会自动创建和用户同名的家目录。<br> 如果没有自动创建家目录，则需要使用以下指令来自动创建同名家目录：</p>
+<blockquote>
+<p>useradd -m 用户名</p>
+</blockquote>
+</li>
+<li><p>可以通过<strong>useradd -d 指定目录 用户名</strong>给新创建的用户指定家目录。<br> 注意指定的目录事先不能存在。</p>
+</li>
+</ol>
+<p><strong>给用户指定或者修改密码：</strong></p>
+<blockquote>
+<p>passwd 用户名</p>
+</blockquote>
+<p><strong>删除用户：</strong></p>
+<ol>
+<li>删除用户，但是保留家目录</li>
+</ol>
+<blockquote>
+<p>userdel 用户名</p>
+</blockquote>
+<ol start="2">
+<li>删除用户和用户家目录</li>
+</ol>
+<blockquote>
+<p>userdel -r 用户名</p>
+</blockquote>
+<p>在删除用户时，一般不会将home下的用户家目录删除。</p>
+<p><strong>查询用户信息：</strong></p>
+<blockquote>
+<p>id 用户名</p>
+</blockquote>
+<p><strong>切换用户：</strong></p>
+<blockquote>
+<p>su - 用户名</p>
+</blockquote>
+<p>从高权限用户切换到低权限用户，不需要输入密码。而反过来则需要输入密码。<br>如果需要返回到原来的用户时，使用exit指令。</p>
+<p><strong>查看当前登录用户：</strong></p>
+<blockquote>
+<p>whoami</p>
+</blockquote>
+<hr>
+<p>用户组：类似于角色，系统可以对有共性的多个用户进行统一管理。</p>
+<p><strong>增加组：</strong></p>
+<blockquote>
+<p>groupadd 组名</p>
+</blockquote>
+<p><strong>删除组：</strong></p>
+<blockquote>
+<p>groupdel 组名</p>
+</blockquote>
+<p><strong>增加用户时直接指定组：</strong></p>
+<blockquote>
+<p>useradd -g 组名 用户名</p>
+</blockquote>
+<p><strong>修改用户的组：</strong></p>
+<blockquote>
+<p>usermod -g 组名 用户名</p>
+</blockquote>
+<hr>
+<p><strong>用户和组的配置文件：</strong></p>
+<ol>
+<li><p>/etc/passwd：用户配置文件（用户信息）。<br> 每行的含义：用户名：口令：用户标识号：组标识号：注释性描述：家目录：登录Shell</p>
+</li>
+<li><p>/etc/group：组配置文件（组信息）。<br> 每行的含义：组名：口令：组标识号：组内用户列表</p>
+</li>
+<li><p>/etc/shadow：口令配置文件（密码和登录信息，该文件是加密的）。<br> 每行的含义：登录名：加密口令：最后一次修改时间：最小时间间隔：最大时间间隔：警告时间：不活动时间：失效时间：标志</p>
+</li>
+</ol>
+<h2 id="实用指令"><a href="#实用指令" class="headerlink" title="实用指令"></a>实用指令</h2><p><strong>运行级别和找回root密码：</strong></p>
+<p>运行级别：</p>
+<ol start="0">
+<li>关机</li>
+<li>单用户</li>
+<li>多用户状态没有网络服务</li>
+<li>多用户状态有网络服务</li>
+<li>系统未使用保留给用户</li>
+<li>图形界面</li>
+<li>系统重启</li>
+</ol>
+<p>常用运行级别是3和5，要修改默认的运行级别可改文件/etc/inittab的id：5：initdefault这一行中的数字。</p>
+<hr>
+<h3 id="文件目录类指令"><a href="#文件目录类指令" class="headerlink" title="文件目录类指令"></a>文件目录类指令</h3><p><strong>pwd：显示当前工作目录的绝对路径。</strong></p>
+<p><strong>ls：显示当前目录所有的文件和目录</strong></p>
+<blockquote>
+<p>ls [选项] [目录或是文件]                </p>
+<p>ls -a                                                显示当前目录所有的文件和目录，包括隐藏的</p>
+<p>ls -l                                                以列表的方式显示信息    </p>
+</blockquote>
+<p><strong>cd：change directory，改变工作目录</strong></p>
+<blockquote>
+<p>cd ~或cd                回到家目录</p>
+<p>cd ..                        回到当前目录的上一级目录</p>
+</blockquote>
+<p><strong>mkdir：make directory，用于创建目录</strong></p>
+<blockquote>
+<p>mkdir [选项] 要创建的目录</p>
+<p>mkdir -p 要创建的目录                                创建多级目录            </p>
+</blockquote>
+<p><strong>rmdir：删除空目录</strong></p>
+<blockquote>
+<p>rmdir [选项] 要删除的空目录</p>
+<p>rmdir删除的是空目录，如果目录下有内容时是无法删除的，如果要删除非空目录，需使用以下指令：</p>
+<p>rm -rf 要删除的目录</p>
+</blockquote>
+<p><strong>touch：新建空文件</strong></p>
+<blockquote>
+<p>touch 文件名</p>
+<p>touch 文件名 文件名 文件名            可以同时新建多个空文件</p>
+</blockquote>
+<p><strong>cp：拷贝文件到指定目录</strong></p>
+<blockquote>
+<p>cp [选项] source dest</p>
+</blockquote>
+<p>常用选项  -r  递归复制整个文件夹</p>
+<p>强制覆盖不提示：\cp </p>
+<p><strong>rm：移除文件或目录</strong></p>
+<blockquote>
+<p>rm [选项] 要删除的文件或目录</p>
+</blockquote>
+<p>常用选项：<br>-r：递归删除整个文件夹<br>-f：强制删除不提示</p>
+<p><strong>mv：移动文件与目录或重命名</strong></p>
+<blockquote>
+<p>mv oldNameFile newNameFile</p>
+<p>mv /temp/moveFile /targetFolder</p>
+</blockquote>
+<p><strong>cat：查看文件内容，以只读的方式打开</strong></p>
+<blockquote>
+<p>cat [选项] 要查看的文件</p>
+</blockquote>
+<p>常用选项：<br>-n：显示行号</p>
+<p><strong>more：一个基于vi编辑器的文本过滤器，以全屏幕的方式按页显示文本文件的内容</strong></p>
+<blockquote>
+<p>more 要查看的文件</p>
+</blockquote>
+<p>可以搭配cat一起使用</p>
+<blockquote>
+<p>cat [选项] 要查看的文件 | more</p>
+</blockquote>
+<p><strong>快捷键：</strong></p>
+<p>空格键：向下翻一页</p>
+<p>Enter：向下翻一行</p>
+<p>q：立即离开more，不再显示该文件内容</p>
+<p>Ctrl + F：向下滚动一屏</p>
+<p>Ctrl + B：返回上一屏</p>
+<p>=：输出当前行的行号</p>
+<p>:f：输出文件名和当前行的行号</p>
+<p><strong>less：用来分屏查看文件内容，它的功能与more指令类似，但是比more指令更加强大，支持各种显示终端。less指令在显示文件内容时，并是不一次将整个文件加载后才显示，而是显示需要加载的内容，对于显示大型文件具有较高的效率。</strong></p>
+<blockquote>
+<p>less 要查看的文件</p>
+</blockquote>
+<p><strong>快捷键：</strong></p>
+<p>空格键 / Page Down：向下翻一页</p>
+<p>Page Up：向上翻一页</p>
+<p>/字串：向下搜索【子串】，n为向下查找，N为向上查找</p>
+<p>?子串：向上搜索【子串】，n为向上查找，N为向下查找</p>
+<p>q：立即离开less这个程序</p>
+<p><strong>&gt;：输出重定向</strong></p>
+<p><strong>&gt;&gt;：追加</strong></p>
+<p>列表的内容写入文件中（覆盖写）</p>
+<blockquote>
+<p>ls -l &gt;文件</p>
+</blockquote>
+<p>列表的内容追加到文件的末尾</p>
+<blockquote>
+<p>ls -al &gt;&gt;文件</p>
+</blockquote>
+<p>将文件1的内容覆盖到文件2</p>
+<blockquote>
+<p>cat 文件1 &gt; 文件2</p>
+</blockquote>
+<p>将双引号中的内容追加到文件中</p>
+<blockquote>
+<p>echo “内容” &gt;&gt; 文件</p>
+</blockquote>
+<p>将当前日历信息保存到文件中</p>
+<blockquote>
+<p>cal &gt;&gt; 文件</p>
+</blockquote>
+<p><strong>echo：输出内容到控制台</strong></p>
+<blockquote>
+<p>echo [选项] [输出内容]</p>
+</blockquote>
+<p><strong>head：用于显示文件的开头部分内容，默认情况下head指令显示文件的前10行内容</strong></p>
+<blockquote>
+<p>head 文件</p>
+</blockquote>
+<p>查看前5行</p>
+<blockquote>
+<p>head -n 5 文件</p>
+</blockquote>
+<p><strong>tail：用于输出文件中尾部的内容，默认情况下tail指令显示文件的后10行内容</strong></p>
+<blockquote>
+<p>tail 文件</p>
+</blockquote>
+<p>查看后5行</p>
+<blockquote>
+<p>tail -n 5 文件</p>
+</blockquote>
+<p>实时追踪该文档的所有更新</p>
+<blockquote>
+<p>tail -f 文件</p>
+</blockquote>
+<p><strong>ln：给原文件创建一个软链接。软链接也叫符号链接，类似于WIndows里的快捷方式，主要存放了链接其他文件的路径</strong></p>
+<blockquote>
+<p>ln -s [原文件或目录] [软链接名]</p>
+</blockquote>
+<p>删除软链接</p>
+<blockquote>
+<p>rm -rf 软链接名</p>
+</blockquote>
+<p>如果通过软链接进入目录，此时通过pwd查看当前路径，看到的还是软链接名</p>
+<p><strong>history：查看已经执行过的历史命令，也可以执行历史指令</strong></p>
+<p>查看所有执行过的历史命令</p>
+<blockquote>
+<p>history</p>
+</blockquote>
+<p>查看最近使用的10条指令</p>
+<blockquote>
+<p>history 10</p>
+</blockquote>
+<p>执行历史编号为x的指令，x可以为历史指令中的任意一个</p>
+<blockquote>
+<p>!x</p>
+</blockquote>
+<h3 id="时间日期类指令"><a href="#时间日期类指令" class="headerlink" title="时间日期类指令"></a>时间日期类指令</h3><p><strong>data：显示当前日期</strong></p>
+<p>显示当前时间</p>
+<blockquote>
+<p>date</p>
+</blockquote>
+<p>显示当前年份</p>
+<blockquote>
+<p>date “+%Y”</p>
+</blockquote>
+<p>显示当前月份</p>
+<blockquote>
+<p>date “+%m”</p>
+</blockquote>
+<p>显示当前是哪一天</p>
+<blockquote>
+<p>date “+%d”</p>
+</blockquote>
+<p>显示当前年月日时分秒</p>
+<blockquote>
+<p>date “+%Y年%m月%d日 %H:%M:%S”</p>
+</blockquote>
+<p>设置当前系统时间</p>
+<blockquote>
+<p>date -s “2020-8-7 11:22:33”</p>
+</blockquote>
+<p><strong>cal：查看日历指令</strong></p>
+<p>查看当前日历</p>
+<blockquote>
+<p> cal</p>
+</blockquote>
+<p>查看2012年的日历</p>
+<blockquote>
+<p>cal 2012</p>
+</blockquote>
+<h3 id="搜索查找类指令"><a href="#搜索查找类指令" class="headerlink" title="搜索查找类指令"></a>搜索查找类指令</h3><p>find：从指定目录向下递归地遍历其各个子目录，将满足条件的文件或者目录显示在终端</p>
+<blockquote>
+<p>find [搜索范围] [选项]</p>
+</blockquote>
+<p>常用选项：</p>
+<p>-name：按照指定的文件名查找文件</p>
+<p>-user：查找属于指定用户的所有文件</p>
+<p>-size：查找文件大小大于（+n）或小于（-n）或等于（n）的文件，n为文件大小，例如20M、20K</p>
+<p>查询根目录下（/），所有.txt文件</p>
+<blockquote>
+<p>find / -name *.txt</p>
+</blockquote>
+<p>locate：可以快速定位文件路径。locate指令利用事先建立的系统中所有文件名称及路径的locate数据库实现快速定位给定的文件。locate指令无需遍历整个文件系统，查询速度较快。为了保证查询结果的准确度，管理员必须定期更新locate时刻。</p>
+<p>要使用locate指令，第一步应该先执行updatedb指令创建locate数据库</p>
+<blockquote>
+<p>updatedb</p>
+</blockquote>
+<p>第二步直接查询文件</p>
+<blockquote>
+<p>locate 文件名</p>
+</blockquote>
+<p><strong>grep：过滤查找</strong></p>
+<p><strong>|：管道符，表示将前一个命令的处理结果输出传递到后面的命令处理</strong></p>
+<blockquote>
+<p>grep [选项] 查找内容 原文件</p>
+</blockquote>
+<p>常用选项：</p>
+<p>-n：显示匹配行及行号</p>
+<p>-i：忽略字母大小写</p>
+<p>示例：在hello.txt文件中查找 “yes” 所在的行，并且显示行号，忽略大小写</p>
+<blockquote>
+<p>cat hello.txt | grep -ni yes</p>
+</blockquote>
+<h3 id="压缩和解压类指令"><a href="#压缩和解压类指令" class="headerlink" title="压缩和解压类指令"></a>压缩和解压类指令</h3><p><strong>gzip / gunzip：gzip用于压缩文件，gunzip用于解压文件</strong></p>
+<p>压缩文件（只能将文件压缩为<em>.gz文件），*</em>当使用gzip对文件进行压缩后，不会保留原来的文件**</p>
+<blockquote>
+<p>gzip 文件</p>
+</blockquote>
+<p>解压文件</p>
+<blockquote>
+<p>gunzip 文件.gz</p>
+</blockquote>
+<p><strong>zip / unzip：zip用于压缩文件，unzip用于解压文件，该组指令在项目打包发布中很有用</strong></p>
+<blockquote>
+<p>zip [选项] xxx.zip 要压缩的内容</p>
+</blockquote>
+<p>常用选项：</p>
+<p>-r：递归压缩，即压缩目录</p>
+<p>示例1：将/home下的所有文件压缩成mypackage.zip</p>
+<blockquote>
+<p>zip -r mypackage.zip /home/</p>
+</blockquote>
+<p>示例2：将mypackage.zip解压到/opt/tmp/目录</p>
+<blockquote>
+<p>unzip -d /opt/tmp/ mypackage.zip</p>
+</blockquote>
+<p><strong>tar：打包指令，最后打包后的文件是.tar.gz的文件</strong></p>
+<blockquote>
+<p>tar [选项] xxx.tar.gz 打包的内容</p>
+</blockquote>
+<p>常用选项：</p>
+<p>-c：产生.tar打包文件</p>
+<p>-v：显示详细信息</p>
+<p>-f：指定压缩后的文件名</p>
+<p>-z：打包同时压缩</p>
+<p>-x：解包.tar文件</p>
+<p>示例1：压缩多个文件，将/home/a1.txt和/home/a2.txt压缩成a.tar.gz</p>
+<blockquote>
+<p>tar -zcvf a.tar.gz /home/a1.txt /home/a2.txt</p>
+</blockquote>
+<p>示例2：将/home的文件夹压缩成myhome.tar.gz</p>
+<blockquote>
+<p>tar -zcvf myhome.tar.gz /home/</p>
+</blockquote>
+<p>示例3：将a.tar.gz解压到当前目录</p>
+<blockquote>
+<p>tar -zxvf a.tar.gz</p>
+</blockquote>
+<p>示例4：将myhome.tar.gz解压到/home/opt/下，要指定的目录必须事先存在</p>
+<blockquote>
+<p>tar -zxvf myhome.tar.gz /home/opt/</p>
+</blockquote>
+<h2 id="组管理和权限管理"><a href="#组管理和权限管理" class="headerlink" title="组管理和权限管理"></a>组管理和权限管理</h2><h3 id="组管理"><a href="#组管理" class="headerlink" title="组管理"></a>组管理</h3><p>在Linux中的每个用户都必须属于一个组，不能独立于组外。在Linux中每个文件有：所有者、所在组、其他组的概念。</p>
+<p>文件/目录所有者一般为文件的创建者，谁创建了该文件，就自然地成为该文件的所有者。</p>
+<p>当某个用户创建了一个文件后，默认这个文件的所在组就是该用户所在的组。</p>
+<p>除文件的所有者和所在组的用户外，系统的其他用户都是文件的其他组。</p>
+<p><strong>查看文件的所有者：</strong></p>
+<blockquote>
+<p>ls -ahl</p>
+</blockquote>
+<p>一般来说，文件的所在组就是文件的所有者所在的组。但可以修改。</p>
+<p><strong>修改文件的所有者：</strong></p>
+<blockquote>
+<p>chown 用户名 文件名</p>
+</blockquote>
+<p><strong>修改文件所在组：</strong></p>
+<blockquote>
+<p>chgrp 要修改的组名 文件名</p>
+</blockquote>
+<p><strong>改变用户所在组：</strong></p>
+<blockquote>
+<p>usermod -g 要修改的组名 用户名</p>
+</blockquote>
+<h3 id="权限管理"><a href="#权限管理" class="headerlink" title="权限管理"></a>权限管理</h3><p><img src="/2020/08/08/Linux/image-20200809163626183.png" alt="image-20200809163626183"></p>
+<p>ls -l中显示的内容如下：</p>
+<p>-rw-r–r– 1 hgx98 hgx98 0 8月   9 16:13 ok.txt</p>
+<p>0~9位说明</p>
+<ol>
+<li>第0位确定文件类型</li>
+<li>第1~3位确定所有者（该文件的所有者）拥有该文件的什么权限</li>
+<li>第4~6位确定所在组（同用户组的）拥有该文件的什么权限</li>
+<li>第7~9位确定其他用户拥有该文件的什么权限</li>
+</ol>
+<hr>
+<p><strong>rwx权限详解</strong></p>
+<p>rwx作用到文件：</p>
+<ol>
+<li>r代表可读：可以读取，查看</li>
+<li>w代表可写：可以修改，但是不代表可以删除该文件，删除一个文件的前提是<strong>对该文件所在目录有写权限</strong>，才能删除该文件。</li>
+<li>x代表可执行（execute）：可以被执行</li>
+</ol>
+<p>rwx作用到目录</p>
+<ol>
+<li>r代表可读：可以读取，ls查看目录内容</li>
+<li>w代表可写：可以修改，目录内创建+删除+重命名目录</li>
+<li>x代表可执行（execute）：可以进入该目录</li>
+</ol>
+<hr>
+<p><strong>修改权限：通过chmod指令，可以修改文件或者目录的权限</strong></p>
+<p>第一种方式：+、-、=变更权限</p>
+<p>实例1：给文件/目录的所有人、所在组、其他人同时指定权限</p>
+<blockquote>
+<p>chmod u=rwx,g=rx,o=x 文件名/目录名</p>
+</blockquote>
+<p>实例2：给其他人添加写权限</p>
+<blockquote>
+<p>chmod o+w 文件名/目录名</p>
+</blockquote>
+<p>实例3：取消所有人的执行权限</p>
+<blockquote>
+<p>chmod a-x 文件名/目录名</p>
+</blockquote>
+<p>第二种方式：通过数字变更权限</p>
+<p>规则：r=4，w=2，x=1，rwx = 4 + 2 + 1 = 7</p>
+<blockquote>
+<p>chmod u=rwx,g=rx,o=x 文件名/目录名</p>
+</blockquote>
+<p>相当于</p>
+<blockquote>
+<p>chmod 751 文件名/目录名</p>
+</blockquote>
+<hr>
+<p><strong>修改文件所有者</strong></p>
+<p>改变文件的所有者</p>
+<blockquote>
+<p>chmod 新用户名 文件名/目录名</p>
+</blockquote>
+<p>修改文件的所有者和所在组</p>
+<blockquote>
+<p>chmod 新用户名:新组名 文件名/目录名</p>
+</blockquote>
+<p>修改目录及其子文件、子目录的所有者</p>
+<blockquote>
+<p>chmod -R 新用户名 目录名</p>
+</blockquote>
+<hr>
+<p><strong>修改文件所在组</strong></p>
+<p>改变文件的所在组</p>
+<blockquote>
+<p>chgrp 新组名 文件名/目录名</p>
+</blockquote>
+<p>修改目录下的所有文件和目录的所在组</p>
+<blockquote>
+<p>chgrp -R 新组名 目录名</p>
+</blockquote>
+<h2 id="任务调度"><a href="#任务调度" class="headerlink" title="任务调度"></a>任务调度</h2><p>概述：任务调度是指系统在某个时间执行的特定的命令或程序。</p>
+<p>任务调度分类：</p>
+<ol>
+<li>系统工作：有些重要的工作必须周而复始地执行，如病毒扫描等。</li>
+<li>个别用户工作：个别用户可能希望执行某些程序，比如对mysql数据库的备份。</li>
+</ol>
+<p>基本语法</p>
+<blockquote>
+<p>crontab [选项]</p>
+</blockquote>
+<p>常用选项</p>
+<p>-e：编辑crontab定时任务</p>
+<p>-l：查询crontab任务</p>
+<p>-r：删除当前用户所有的crontab任务</p>
+<p><strong>5个占位符说明：</strong></p>
+<p>第一个 *：一个小时当中的第几分钟，范围是0~59</p>
+<p>第二个 *：一天当中的第几小时，范围是0~23</p>
+<p>第三个 *：一个月当中的第几天，范围是1~31</p>
+<p>第四个 *：一年当中的第几月，范围是1~12</p>
+<p>第五个 *：一周当中的星期几，范围是0~7（0和7都代表星期天）</p>
+<p><strong>特殊符号说明：</strong></p>
+<p>* ：代表任何时间</p>
+<p>, ：代表不连续的时间。比如“0 8,12,16 * * *”命令，代表在每天的8点0分、12点0分、16点0分都执行一次命令</p>
+<p>- ：代表连续的时间范围。比如“0 5 * * 1-6”命令，代表周一到周六的凌晨5点0分执行命令</p>
+<p><em>/n ：代表每隔多久执行一次。比如“\</em>/10 * * * *”命令，代表每隔10分钟就执行一遍命令</p>
+<p><strong>特定时间执行任务的一些案例：</strong></p>
+<p><strong>45 22 * * *</strong>：在22点45分执行命令</p>
+<p><strong>0 17 * * 1</strong>：每周一的17点0分执行命令</p>
+<p><strong>0 5 1,15 * *</strong>：每月1号和15号的凌晨5点0分执行命令</p>
+<p><strong>40 4 * * 1-5</strong>：每周一到周五的凌晨4点40分执行命令</p>
+<p><strong>*/10 4 * * *</strong>：每天的凌晨4点，每隔十分钟执行一次命令</p>
+<p><strong>0 0 1,15 * 1</strong>：每月1号和15号，每周一的0点0分都会执行命令。注意，星期几和几号最好不要同时出现，因为它们定义的都是天，非常容易让管理员混乱</p>
+<p>案例：每隔一分钟，就将当前的日期信息，追加到/tmp/mydate文件中</p>
+<ol>
+<li><p>编写脚本文件 /home/mytask.sh</p>
+<blockquote>
+<p>vim mytask.sh</p>
+</blockquote>
+</li>
+</ol>
+<p><img src="/2020/08/08/Linux/image-20200809212944570.png" alt="image-20200809212944570"></p>
+<ol start="2">
+<li><p>给mytask.sh可执行权限</p>
+<blockquote>
+<p>chmod 744 mytask.sh</p>
+</blockquote>
+</li>
+<li><p>编辑定时任务</p>
+<blockquote>
+<p>crontab -e</p>
+<p>*/1 * * * * /home/mytask.sh</p>
+</blockquote>
+</li>
+</ol>
+<h2 id="分区"><a href="#分区" class="headerlink" title="分区"></a>分区</h2><p>分区的方式：</p>
+<ul>
+<li>mbr分区<ol>
+<li>最多支持四个主分区</li>
+<li>系统只能安装在主分区</li>
+<li>扩展分区要占一个主分区</li>
+<li>MBR最大只支持2TB，但拥有最好的兼容性</li>
+</ol>
+</li>
+<li>gtp分区：<ol>
+<li>支持无限多个主分区（但操作系统可能限制，比如Windows下最多128个分区）</li>
+<li>最大支持18EB的大容量</li>
+<li>Windows7 64位以后支持gtp</li>
+</ol>
+</li>
+</ul>
+<h3 id="Linux分区"><a href="#Linux分区" class="headerlink" title="Linux分区"></a>Linux分区</h3><p><strong>原理介绍：</strong></p>
+<ol>
+<li>Linux无论有几个分区，分给哪一目录使用，归根结底就只有一个根目录，一个独立且唯一的文件结构，Linux中每个分区都是用来组成整个文件系统的一部分。</li>
+<li>Linux采用了一种叫“载入”的处理方法，它的整个文件系统中包含了一整套的文件和目录，且将一个分区和一个目录联系起来，这时要载入的一个分区将使它的存储空间在一个目录下获得。</li>
+</ol>
+<p><strong>硬盘说明：</strong></p>
+<ol>
+<li>Linux硬盘分IDE硬盘和SCSI硬盘，目前基本上是SCSI硬盘</li>
+<li>对于IDE硬盘，驱动器标识符为”hdx<del>“，其中”hd”表明分区所在设备的类型，这里是指IDE硬盘。”x”为盘号（a为基本盘，b为基本从属盘，c为辅助主盘，d为辅助从属盘），”</del>“代表分区，前四个分区用数字1到4表示，它们是主分区或扩展分区，从4开始就是逻辑分区。例如，hda3表示为第一个IDE硬盘上的第三个主分区或扩展分区，hdb2表示为第二个IDE硬盘上的第二个主分区或扩展分区。</li>
+<li>对于SCSI硬盘则表示为”sdx~”，SCSI硬盘使用”sd”来表示分区所在设备的类型的，其余则和IDE硬盘的表示方法一样。</li>
+</ol>
+<h2 id="网络配置"><a href="#网络配置" class="headerlink" title="网络配置"></a>网络配置</h2><h3 id="Linux网络环境配置"><a href="#Linux网络环境配置" class="headerlink" title="Linux网络环境配置"></a>Linux网络环境配置</h3><p><strong>第一种方法：自动获取</strong></p>
+<p>缺点：Linux启动后会自动获取IP，每次自动获取的IP地址可能不一样，这个不适用于服务器，因为服务器的IP需要是固定的。</p>
+<p><strong>第二种方式：指定固定的IP</strong></p>
+<ol>
+<li><p>进入root用户</p>
+<blockquote>
+<p>sudo su</p>
+</blockquote>
+</li>
+<li><p>查看参数信息</p>
+<blockquote>
+<p>nmcli dev show</p>
+</blockquote>
+</li>
+</ol>
+<p><img src="/2020/08/08/Linux/image-20200809225342317.png" alt="image-20200809225342317"></p>
+<ol start="3">
+<li><p>编辑配置文件</p>
+<blockquote>
+<p>vim /etc/network/interfaces</p>
+</blockquote>
+<p> 添加内容<br> <img src="/2020/08/08/Linux/image-20200809225637315.png" alt="image-20200809225637315"></p>
+</li>
+<li><p>重启网络</p>
+<blockquote>
+<p>ifconfig ens33 down</p>
+<p>ifconfig ens33 up</p>
+</blockquote>
+</li>
+</ol>
+<h2 id="进程管理"><a href="#进程管理" class="headerlink" title="进程管理"></a>进程管理</h2><h3 id="进程介绍"><a href="#进程介绍" class="headerlink" title="进程介绍"></a>进程介绍</h3><p><strong>进程的基本介绍：</strong></p>
+<ol>
+<li>在Linux中，每个执行的程序都称为一个进程。每一个进程都分配一个ID号。</li>
+<li>每一个进程，都会对应一个父进程，而这个父进程可以复制多个子进程。例如www服务器。</li>
+<li>每个进程都可能以两种方式存在。前台与后台，所谓前台进程就是用户目前的屏幕上可以进行操作的。后台进程则是实际在操作，但是由于屏幕上无法看到的进程，通常使用后台方式执行。</li>
+<li>一般系统的服务都是以后台进程的方式存在，而且都会常驻在系统中，直到关机才结束。</li>
+</ol>
+<p><strong>显示系统执行的进程：</strong></p>
+<p>ps命令可以用来查看目前系统中有哪些正在执行的进程，以及它们执行的状况。该命令可以不加任何参数，但是一般都使用<strong>ps -aux</strong>。</p>
+<p><img src="/2020/08/08/Linux/image-20200809232409342.png" alt="image-20200809232409342"></p>
+<p>ps显示的信息选项：</p>
+<p>PID：进程识别号</p>
+<p>TTY：终端机号</p>
+<p>TIME：此进程所消CPU时间</p>
+<p>CMD：正在执行的命令或进程名</p>
+<p>显示当前终端的所有进程信息：</p>
+<blockquote>
+<p>ps -a</p>
+</blockquote>
+<p>以用户的格式显示进程信息：</p>
+<blockquote>
+<p>ps -u</p>
+</blockquote>
+<p>显示后台进程运行的参数：</p>
+<blockquote>
+<p>ps -x</p>
+</blockquote>
+<p><img src="/2020/08/08/Linux/image-20200809233751229.png" alt="image-20200809233751229"></p>
+<p>USER：用户名称</p>
+<p>PID：进程号</p>
+<p>%CPU：进程占用CPU的百分比</p>
+<p>%MEM：进程占用物理内存的百分比</p>
+<p>%VSZ：进程占用的虚拟内存的大小，单位KB</p>
+<p>%RSS：进程占用的物理内存的大小，单位KB</p>
+<p>%TTY：终端名称，缩写</p>
+<p>%STAT：进程状态，S为睡眠，s表示该进程是会话的先导进程，N表示进程拥友比普通优先级更低的优先级，R正在运行，D短期等待，Z僵死进程，T被跟踪或者被停止等等。</p>
+<p>%START：进程的启动时间</p>
+<p>%TIME：CPU时间，即进程使用CPU的总时间</p>
+<p>%COMMAND：启动进程所用的命令和参数，如果过长会被截断显示</p>
+<p>查看sshd的父进程</p>
+<p><img src="/2020/08/08/Linux/image-20200809234557559.png" alt="image-20200809234557559"></p>
+<h3 id="终止进程"><a href="#终止进程" class="headerlink" title="终止进程"></a>终止进程</h3><p>若是某个进程执行一半需要停止时，或是已消耗很大的系统资源时，此时可以考虑使用kill命令来停止该进程。</p>
+<p><strong>通过进程号杀死进程</strong></p>
+<blockquote>
+<p>kill [选项] 进程号</p>
+</blockquote>
+<p><strong>通过进程名称杀死进程，也支持通配符，在系统因负载过大而变得很慢时很有用</strong></p>
+<blockquote>
+<p>killall 进程名称</p>
+</blockquote>
+<p><strong>常用选项：</strong></p>
+<p>-9：表示强迫进程立即停止</p>
+<hr>
+<p>案例1：踢掉某个非法登录用户</p>
+<p><img src="/2020/08/08/Linux/image-20200809235606426.png" alt="image-20200809235606426"></p>
+<p>案例2：终止远程登录服务sshd，在适当时候再次重启sshd服务</p>
+<p><img src="/2020/08/08/Linux/image-20200809235750775.png" alt="image-20200809235750775"></p>
+<p><strong>重新启动：/etc/init.d/ssh start</strong></p>
+<hr>
+<p><strong>查看进程树：</strong></p>
+<blockquote>
+<p>pstree [选项]</p>
+</blockquote>
+<p>常用选项：</p>
+<p>-p ：显示进程的PID</p>
+<p>-u ：显示进程的所属用户</p>
+<h3 id="服务管理"><a href="#服务管理" class="headerlink" title="服务管理"></a>服务管理</h3><p>服务（service）本质就是进程，但是是运行在后台的，通常都会监听某个端口，等待其他程序的请求，比如mysql、sshd、防火墙等等，因此我们又称为守护进程。</p>
+<p>案例：查看当前防火墙的状况，关闭防火墙和重启防火墙</p>
+<h3 id="监控服务"><a href="#监控服务" class="headerlink" title="监控服务"></a>监控服务</h3><h2 id="rpm包"><a href="#rpm包" class="headerlink" title="rpm包"></a>rpm包</h2><p>一种用于互联网下载包的打包及安装工具，它包含在某些Linux分发版中，它生成具有.RPM扩展名的文件。RMP是RedHat Package Manager（RedHat软件包管理工具）的缩写，类似于Windows的setup.exe，这一文件格式名称虽然打上了RedHat的标志，但是理念是通用的。Linux的分发版本都有采用suse、redhat、centos等等，可以算是公认的行业标准了。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/06/14/Spring%E6%BA%90%E7%A0%81%E7%AC%94%E8%AE%B0/" rel="next" title="Spring源码笔记">
+                <i class="fa fa-chevron-left"></i> Spring源码笔记
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/08/11/MySQL%E9%AB%98%E7%BA%A7/" rel="prev" title="MySQL高级">
+                MySQL高级 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="hgx98" />
+            
+              <p class="site-author-name" itemprop="name">hgx98</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%20%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Linux基础篇"><span class="nav-text">Linux基础篇</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Linux介绍"><span class="nav-text">Linux介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Linux目录结构"><span class="nav-text">Linux目录结构</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Linux实操篇"><span class="nav-text">Linux实操篇</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#远程登录Linux系统"><span class="nav-text">远程登录Linux系统</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#vi和vim编辑器"><span class="nav-text">vi和vim编辑器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#关机重启注销"><span class="nav-text">关机重启注销</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#用户管理"><span class="nav-text">用户管理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实用指令"><span class="nav-text">实用指令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#文件目录类指令"><span class="nav-text">文件目录类指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#时间日期类指令"><span class="nav-text">时间日期类指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#搜索查找类指令"><span class="nav-text">搜索查找类指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#压缩和解压类指令"><span class="nav-text">压缩和解压类指令</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#组管理和权限管理"><span class="nav-text">组管理和权限管理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#组管理"><span class="nav-text">组管理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#权限管理"><span class="nav-text">权限管理</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#任务调度"><span class="nav-text">任务调度</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分区"><span class="nav-text">分区</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Linux分区"><span class="nav-text">Linux分区</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#网络配置"><span class="nav-text">网络配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Linux网络环境配置"><span class="nav-text">Linux网络环境配置</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#进程管理"><span class="nav-text">进程管理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#进程介绍"><span class="nav-text">进程介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#终止进程"><span class="nav-text">终止进程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#服务管理"><span class="nav-text">服务管理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#监控服务"><span class="nav-text">监控服务</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#rpm包"><span class="nav-text">rpm包</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">hgx98</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

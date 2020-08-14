@@ -1,0 +1,1190 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="RedisNoSQL入门和概述入门概述互联网时代背景下为什么用NoSQL？  在90年代，一个网站的访问量一般都不大，用单个数据库完全可以轻松应付，在那个时候，更多的都是静态页面，动态交互类型的网站不多。那么数据库的瓶颈是什么呢？  数据量的总大小一个机器放不下时 数据的索引（B+Tree）一个机器的内存放不下时 访问量（读写混合）一个实例不能承受   后来，随着访问量的上升，几乎大部分使用MyS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Redis学习笔记">
+<meta property="og:url" content="http://yoursite.com/2020/08/14/Redis%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="RedisNoSQL入门和概述入门概述互联网时代背景下为什么用NoSQL？  在90年代，一个网站的访问量一般都不大，用单个数据库完全可以轻松应付，在那个时候，更多的都是静态页面，动态交互类型的网站不多。那么数据库的瓶颈是什么呢？  数据量的总大小一个机器放不下时 数据的索引（B+Tree）一个机器的内存放不下时 访问量（读写混合）一个实例不能承受   后来，随着访问量的上升，几乎大部分使用MyS">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://yoursite.com/2020/08/14/Redis%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20200810184733363.png">
+<meta property="og:image" content="http://yoursite.com/2020/08/14/Redis%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20200810185603501.png">
+<meta property="og:image" content="http://yoursite.com/2020/08/14/Redis%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20200810190049062.png">
+<meta property="og:image" content="http://yoursite.com/2020/08/14/Redis%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20200810190240142.png">
+<meta property="og:image" content="http://yoursite.com/2020/08/14/Redis%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20200810214638096.png">
+<meta property="og:image" content="http://yoursite.com/2020/08/14/Redis%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20200810214755486.png">
+<meta property="og:image" content="http://yoursite.com/2020/08/14/Redis%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20200810232805689.png">
+<meta property="og:image" content="http://yoursite.com/2020/08/14/Redis%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20200811001004741.png">
+<meta property="og:image" content="http://yoursite.com/2020/08/14/Redis%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20200811004812156.png">
+<meta property="og:image" content="http://yoursite.com/2020/08/14/Redis%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20200811173818366.png">
+<meta property="og:image" content="http://yoursite.com/2020/08/14/Redis%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20200811173816539.png">
+<meta property="article:published_time" content="2020-08-14T15:58:00.000Z">
+<meta property="article:modified_time" content="2020-08-14T15:58:15.061Z">
+<meta property="article:author" content="hgx98">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/2020/08/14/Redis%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20200810184733363.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/08/14/Redis学习笔记/"/>
+
+
+
+
+
+  <title>Redis学习笔记 | Hexo</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/14/Redis%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="hgx98">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Redis学习笔记</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-08-14T23:58:00+08:00">
+                2020-08-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Redis"><a href="#Redis" class="headerlink" title="Redis"></a>Redis</h1><h1 id="NoSQL入门和概述"><a href="#NoSQL入门和概述" class="headerlink" title="NoSQL入门和概述"></a>NoSQL入门和概述</h1><h2 id="入门概述"><a href="#入门概述" class="headerlink" title="入门概述"></a>入门概述</h2><p><strong>互联网时代背景下为什么用NoSQL？</strong></p>
+<ol>
+<li><p>在90年代，一个网站的访问量一般都不大，用单个数据库完全可以轻松应付，在那个时候，更多的都是静态页面，动态交互类型的网站不多。那么数据库的瓶颈是什么呢？</p>
+<ol>
+<li>数据量的总大小一个机器放不下时</li>
+<li>数据的索引（B+Tree）一个机器的内存放不下时</li>
+<li>访问量（读写混合）一个实例不能承受</li>
+</ol>
+</li>
+<li><p>后来，随着访问量的上升，几乎大部分使用MySQL架构的网站在数据库上都开始出现了性能问题，web程序不再仅仅专注在功能上，同时也在追求性能。程序员们开始大量地使用缓存技术来换届数据库的压力，优化数据库的结构和索引。开始比较流行的是通过文件缓存来解决数据库压力，但是当访问量继续增大的时候，多台web机器通过文件缓存不能共享，大量的小文件也带来了比较高的IO压力，在这个时候，Memcached就自然地成为一个非常时尚的技术产品。</p>
+</li>
+<li><p>由于数据库的写入压力增加，Memcached只能缓解数据库的读取压力。读写集中在一个数据库上让数据库不堪重负，大部分网站开始使用主从复制技术来达到读写分离，以提高读写性能和读库的可扩展性。MySQL的master-slave模式成为这个时候的网站标配了。</p>
+</li>
+<li><p>在Memcached的高速缓存、MySQL的主从复制、读写分离的基础上，这时MySQL主库的写压力开始出现瓶颈，而数据量的持续猛增，由于MyISAM使用表锁，在高并发下会出现严重的锁问题，大量的高并发MySQL应用开始使用InnoDB引擎代替MyISAM。<br> 同时，开始流行使用分表分库来缓解写压力和数据增长的扩展性问题。这个时候，分表分库成了一个热门技术，是面试的热门问题也是业界讨论的热门技术问题。也就在这个时候，MySQL推出了还不太稳定的表分区，这也给技术实力一般的公司带来了希望。虽然MySQL推出了MySQL Cluster集群，但性能也不能很好满足互联网的要求，只是在高可靠性上提供了非常大的保证。</p>
+</li>
+<li><p>MySQL数据库也经常存储一些大文本字段，导致数据库表非常大，在做数据库恢复的时候就导致非常的慢，不容易快速恢复数据库。比如1000万4kb大小的文本就接近40GB的大小，如果能把这些数据从MySQL省去，MySQL将变得非常的小。关系数据库很强大，但是它并不能很好地应付所有的应用场景。MySQL的扩展性差（需要复杂的技术来实现），大数据下IO压力大，表结构更改困难，正式当前使用MySQL的开发人员面临的问题。</p>
+</li>
+<li><p>为什么使用NoSQL？今天我们可以通过第三方平台（如：Google，Facebook等）可以很容易的访问和抓取数据。用户的个人信息、社交网络、地理位置、用户生成的数据和用户操作日志已经成倍增加。我们如果要对这些用户数据进行挖掘，那SQL数据库已经不适用于这些应用了，NoSQL数据库的发展却能很好的处理这些大的数据。</p>
+</li>
+</ol>
+<p><strong>NoSQL是什么？</strong></p>
+<p>Not Only SQL，即不仅仅是SQL，泛指非关系型数据库。随着互联网web2.0网站的兴起，传统的关系数据库在应付web2.0网站，特别是超大规模和高并发的SNS类型的web2.0纯动态丸子已经显得力不从心，暴露了很多难以克服的问题，而非关系型数据库则由于其本身的特点得到了非常迅速的发展。NoSQL数据库的产生就是为了解决大规模数据集合多重数据种类带来的挑战，尤其是大数据应用难题，包括超大规模数据的存储。<strong>这些类型的数据存储不需要固定的模式，无需多余的操作就可以横向扩展。</strong></p>
+<p><strong>NoSQL能干什么？</strong></p>
+<ol>
+<li><p>易扩展。NoSQL数据库种类繁多，但是一个共同的特点都是去掉关系型数据库的关系型特性。数据之间无关系，这样就非常容易扩张。也无形之间，在架构的层面上带来了可扩展的能力。</p>
+</li>
+<li><p>大数据量高性能。NoSQL数据库都具有非常高的读写性能，尤其在大数据量下，同样表现优秀。这得益于它的无关系性，数据库的结构简单。一般MySQL使用Query Cache，每次表的更新Cache就失效，是一种大粒度的Cache。在针对web2.0的交互频繁的应用，Cache性能不高。而NoSQL的Cache是记录级的，是一种细粒度的Cache，所以NoSQL在这个层面上来说性能就要高很多了。</p>
+</li>
+<li><p>多样灵活的数据模型。NoSQL无需事先为要存储的数据简历字段，随时可以存储自定义的数据格式。而在关系型数据库里，增删字段是一件非常麻烦的事情。如果是非常大数据量的表，增加字段简直就是一个噩梦。</p>
+</li>
+<li><p>传统RDBMS vs NoSQL。</p>
+<blockquote>
+<p>RDBMS</p>
+<blockquote>
+<p>高度组织化结构化数据</p>
+<p>结构化查询语言</p>
+<p>数据和关系都存储在单独的表中</p>
+<p>数据操纵语言，数据定义语言</p>
+<p>严格的一致性</p>
+<p>基础事务</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<p>NoSQL</p>
+<blockquote>
+<p>代表着不仅仅是SQL</p>
+<p>没有声明性查询语言</p>
+<p>没有预定义的模式</p>
+<p>键-值对存储、列存储、文档存储、图形数据库</p>
+<p>最终一致性，而非ACID属性</p>
+<p>非结构化和不可预知的数据</p>
+<p>CAP定理</p>
+<p>高性能，高可用性和可伸缩性</p>
+</blockquote>
+</blockquote>
+</li>
+</ol>
+<p><strong>3V和3高：</strong></p>
+<p>大数据时代的3V：海量Volume、多样Variety、实时Velocity。</p>
+<p>互联网需求的3高：高并发、高可扩、高性能。</p>
+<h2 id="NoSQL数据模型简介"><a href="#NoSQL数据模型简介" class="headerlink" title="NoSQL数据模型简介"></a>NoSQL数据模型简介</h2><h2 id="NoSQL数据库的四大分类"><a href="#NoSQL数据库的四大分类" class="headerlink" title="NoSQL数据库的四大分类"></a>NoSQL数据库的四大分类</h2><p><strong>KV键值：</strong></p>
+<p>举例：Tokyo、Cabinet/Tyrant、Redis、Voldemort、Oracle BDB。</p>
+<p>应用场景：内容缓存，主要用于处理大量数据的高访问负载，也用于一些日志系统等等。</p>
+<p>数据模型：Key指向Value的键值对，通常用HashTable来实现。</p>
+<p>优点：查询速度快。</p>
+<p>缺点：数据无结构化，通常只被当做字符串或者二进制数据。</p>
+<p><strong>列存储数据库：</strong></p>
+<p>举例：Cassandra、HBase、Riak</p>
+<p>应用场景：分布式的文件系统。</p>
+<p>数据模型：以列簇式存储，将同一列数据存在一起。</p>
+<p>优点：查询速度快，可扩展性强，更容易进行分布式扩展。</p>
+<p>缺点：功能相对局限。</p>
+<p><strong>文档型数据库：</strong></p>
+<p>举例：CouchDB、MongoDB</p>
+<p>应用场景：Web应用（于Key-Value类似。Value是结构化的，不同的是数据库能够了解Value的内容）</p>
+<p>数据模型：Key-Value对应的键值对，Value为结构化数据。</p>
+<p>优点：数据结构要求不严格，表结构可变，不需要像关系型数据库一样需要预先定义表结构。</p>
+<p>缺点：查询性能不高，而且缺乏统一的查询语法。</p>
+<p><strong>图关系数据库：</strong></p>
+<p>举例：Neo4J、InfoGrid、Infinite Graph。</p>
+<p>应用场景：社交网络，推荐系统等。专注于构建关系图谱。</p>
+<p>数据模型：图结构。</p>
+<p>优点：利用图结构相关算法。比如最短路径寻址，N度关系查询。</p>
+<p>缺点：很多时候需要对整个图做计算才能得出需要的信息。</p>
+<h2 id="在分布式数据库中CAP原理CAP-BASE"><a href="#在分布式数据库中CAP原理CAP-BASE" class="headerlink" title="在分布式数据库中CAP原理CAP+BASE"></a>在分布式数据库中CAP原理CAP+BASE</h2><p><strong>传统的ACID分别是什么？</strong></p>
+<p><strong>A（Atomicity）原子性：</strong></p>
+<p>原子性很容易理解，也就是说事务里的所有操作要么全部做完，要么都不做，事务成功的条件是十五里的所有操作都成功，只要有一个操作失败，整个事务就失败，需要回滚。</p>
+<p><strong>C（Consistency）一致性：</strong></p>
+<p>一致性意思是数据库哟啊一直处于一致的状态，事务的运行不会改变数据库原本的一致性约束。</p>
+<p><strong>I（Isolation）独立性：</strong></p>
+<p>所谓的独立性是指并发的事务之间不会相互影响，如果一个事务要访问的数据正在被另一个事务修改，只要另外一个事务未提交，它所访问的数据就不受未提交事务的影响。</p>
+<p><strong>D（Durability）持久性：</strong></p>
+<p>事务一旦提价后，它所做的修改将会永久地保存在数据库上，即使出现宕机也不会丢失。</p>
+<hr>
+<p><strong>CAP是什么？</strong></p>
+<p><strong>C（Consistency）强一致性</strong></p>
+<p><strong>A（Availability）高可用性</strong></p>
+<p><strong>P（Partition tolerance）分区容错性</strong></p>
+<p>CAP的核心理论是：一个分布式系统不可能同时很好地满足一致性、可用性和分区容错性这三个需求，<strong>最多只能同时较好地满足两个。</strong><br>因此，根据CAP原理将NoSQL数据库分成了满足CA原则、满足CP原则和满足AP原则三大类。</p>
+<p>CA：单点集群，满足一致性、可用性的系统，通常在可扩展性上不太强大。（传统Oracle数据库）</p>
+<p>CP：满足一致性、分区容错性的系统，通常性能不是特别高。（Redis、MongoDB）</p>
+<p>AP：满足可用性、分区容错性的系统，通常对一致性要求低一些。（大多数网站架构的选择）</p>
+<p><strong>CAP的3进2：</strong></p>
+<p>CAP理论就是说在分布式存储系统中，最多只能实现上面的两点。而由于当前的网络硬件肯定会出现延迟丢包等问题，所以<strong>分区容错性是我们必须要实现的</strong>，所以我们只能在一致性和可用性之间进行权衡，没有NoSQL系统能同时保证这三点。</p>
+<p><strong>一致性与可用性的抉择：</strong></p>
+<p>对于WEB2.0网站来说，关系数据库的很多主要特性却往往无用武之地。</p>
+<p>数据库事务一致性需求：<br>        很多WEB实时系统并不要求严格的数据库事务，对读一致性的要求很低，有些场合对写一致性要求并不高。允许实现最终一致性。</p>
+<p>数据库的写实时性和读实时性需求：<br>        对关系型数据库来说，插入一条数据之后立刻查询，是肯定可以读出来这条数据的，但是对于很多web应用来说，并不要求那么高的实时性，比方说发一条信息之后，过几秒乃至十几秒后，我的订阅者才看到这条动态是完全可以接受的。</p>
+<p>对复杂的SQL查询，特别是多表关联查询的需求：<br>        任何大数据量的web系统，都非常忌讳多个大表的关联查询，一级复杂的数据分析类型的报表查询，特别是SNS类型的网站，从需求一级产品设计角度，就避免了这种情况的产生。往往更多的知识单表的逐渐查询，以及单表的简单条件分页查询，SQL的功能被极大地弱化了。</p>
+<p><strong>BASE：</strong></p>
+<p>BASE就是为了解决关系型数据库强一致性引起的问题而引起的可用性降低而提出的解决方案。</p>
+<p>BASE其实是下面三个术语的缩写：</p>
+<p>基本可用（Basically Available）</p>
+<p>软状态（Soft state）</p>
+<p>最终一致（Eventually Consistent）</p>
+<p>它的思想是通过让系统放松对某一时刻数据一致性的要求来换取系统整体伸缩性和性能上的改观。为什么这么说呢？缘由就在于大型系统往往由于地域分布和极高性能的要求，不可能采用分布式事务来完成这些指标，要想获得这些指标，我们必须采用另外一种方式来完成，这里BASE就是解决这个问题的方法。</p>
+<p><strong>分布式 + 集群简介：</strong></p>
+<p>分布式系统（Distributed System）由多台计算机和通信的软件通过计算机网络连接（本地网络或广域网）组成。分布式系统是建立在网络之上的软件系统。正是因为软件的特性，所以分布式系统具有高度的内聚性和透明性。因此，网络和分布式系统之间的区别更多地在于高层软件（特别是操作系统）而不是硬件。分布式系统可以应用在不同的平台上如：PC、工作站、局域网和广域网上等。</p>
+<p>简单来讲：</p>
+<ol>
+<li>分布式：不同的多台服务器上面部署不同的服务模块（工程），它们之间通过Rpc / Rmi之间通信和调用，对外提供服务和组内协作。</li>
+<li>集群：不同的多台服务器上面部署相同的服务模块，通过分布式调度软件进行统一的调度，对外提供服务和访问。</li>
+</ol>
+<h1 id="Redis入门介绍"><a href="#Redis入门介绍" class="headerlink" title="Redis入门介绍"></a>Redis入门介绍</h1><h2 id="入门概述-1"><a href="#入门概述-1" class="headerlink" title="入门概述"></a>入门概述</h2><p><strong>Redis：Re</strong>mote <strong>di</strong>ctionary <strong>s</strong>erver（远程字典服务器），是一款完全开源免费、用C语言编写的、遵守BSD协议的一个高性能的（key / value）分布式内存数据库，基于内存运行，并支持持久化的NoSQL数据库，是当前最热门的NoSQL数据库之一，也被人们称为数据结构服务器。</p>
+<p><strong>Redis与其他Key-Value缓存产品有以下三个特点：</strong></p>
+<ol>
+<li>Redis支持数据的持久化，可以将内存中的数据保持在磁盘中，重启的时候可以再次加载进行使用。</li>
+<li>Redis不仅仅支持简单的Key-Value类型的数据，同时还提供list、set、zset、hash等数据结构的存储。</li>
+<li>Redis支持数据的备份，级master-slave模式的数据备份。</li>
+</ol>
+<p><strong>Redis能干什么？</strong></p>
+<ol>
+<li>内存存储和持久化：Redis支持异步将内存中的数据写到硬盘上，同时不影响继续服务</li>
+<li>取最新N个数据的操作，如：可以将罪行的10条评论的ID放在Redis的List集合里面</li>
+<li>模拟类似于HttpSession这种需要设定过期时间的功能</li>
+<li>发布、订阅消息系统</li>
+<li>定时器、计数器</li>
+</ol>
+<h2 id="Redis安装"><a href="#Redis安装" class="headerlink" title="Redis安装"></a>Redis安装</h2><ol>
+<li><p>首先安装gcc</p>
+<blockquote>
+<p>sudo apt update</p>
+<p>sudo apt install build-essential</p>
+</blockquote>
+<p> 查看gcc编译期是否安装完毕</p>
+<blockquote>
+<p>gcc –version</p>
+</blockquote>
+</li>
+<li><p>从官网上下载redis.tar.gz<br> 官网地址：<a href="http://www.redis.cn/download.html" target="_blank" rel="noopener"></a></p>
+</li>
+<li><p>进入Download文件夹，在此处打开终端</p>
+</li>
+<li><p>将redis.tar.gz解压</p>
+<blockquote>
+<p>tar -zxvf redis.tar.gz</p>
+</blockquote>
+<p> <img src="/2020/08/14/Redis%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20200810184733363.png" alt="image-20200810184733363"></p>
+</li>
+<li><p>解压完后，进入redis-5.0.5</p>
+<blockquote>
+<p>cd redis-5.0.5/</p>
+</blockquote>
+</li>
+<li><p>执行make指令</p>
+<blockquote>
+<p>make</p>
+</blockquote>
+</li>
+<li><p>在用户家目录下新建目录myredis</p>
+<blockquote>
+<p>mkdir myredis</p>
+</blockquote>
+<p> 然后将redis-5.0.5目录下的redis.conf复制到myredis目录中</p>
+<blockquote>
+<p>cp redis.conf /home/hgx98/myredis/</p>
+</blockquote>
+</li>
+<li><p>在myredis中修改redis.conf</p>
+<blockquote>
+<p>vim redis.conf</p>
+</blockquote>
+<p> <img src="/2020/08/14/Redis%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20200810185603501.png" alt="image-20200810185603501"></p>
+<p> 找到此处，将no改为yes</p>
+</li>
+<li><p>进入/home/hgx98/Downloads/redis-5.0.5/src目录，启动redis服务</p>
+<blockquote>
+<p>./redis-server /home/hgx98/myredis/redis.conf</p>
+</blockquote>
+<p> 测试是否成功</p>
+<blockquote>
+<p>./redis-cli -p 6379</p>
+</blockquote>
+<p> <img src="/2020/08/14/Redis%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20200810190049062.png" alt="image-20200810190049062"></p>
+</li>
+<li><p>redis关闭</p>
+<blockquote>
+<p>shutdown</p>
+<p>exit</p>
+</blockquote>
+<p><img src="/2020/08/14/Redis%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20200810190240142.png" alt="image-20200810190240142"></p>
+</li>
+</ol>
+<h2 id="Redis启动后杂项基础知识"><a href="#Redis启动后杂项基础知识" class="headerlink" title="Redis启动后杂项基础知识"></a>Redis启动后杂项基础知识</h2><p>​        单进程模拟来处理客户端的请求。对读写等事件的响应是通过对epoll函数的包装来做到的。Redis的实际处理速度完全依靠主进程的执行效率。<br>​        epoll是Linux内核为处理大批量文件描述符而做了改进的epool，是Linux下多路复用IO及饿哦库select/poll的增强版本，它能显著提高程序在大量并发连接中只有少量活跃的情况下的系统CPU的利用率。</p>
+<p>​        默认数据库数量是16个。可以通过select命令切换数据库，默认数据库下标是从0~15。</p>
+<p>​        DBsize可以查看当前数据库的key的数量。</p>
+<p>​        FlushDB可以清空当前库。</p>
+<p>​        FlushALL可以清空所有库。</p>
+<h2 id="Redis数据类型"><a href="#Redis数据类型" class="headerlink" title="Redis数据类型"></a>Redis数据类型</h2><p><strong>常用五大数据类型：</strong></p>
+<ol>
+<li>String（字符串）<br> String类型是redis最基本的类型，可以理解为与Memcached一模一样的类型，一个key对应一个value。<br> String类型是二进制安全的。意思是redis的String可以包含任何数据，比如jpg图片或者序列化的对象。<br> String类型是redis最基本的数据类型，一个redis中字符串value最多可以是512M。</li>
+<li>Hash（哈希，类似于Java中的Map）<br> Redis Hash是一个键值对集合。<br> Redis Hash是一个String类型的field和value的映射表，Hash特别适用于存储对象，类似于Java里的Map&lt;String, Object&gt;。</li>
+<li>List（列表）<br> Redis列表是简单的字符串列表，按照插入顺序排序。可以添加一个元素到列表的头部或者尾部，底层实际是个链表。</li>
+<li>Set（集合）<br> Redis的Set是String类型的无需集合。通过HashTable实现。</li>
+<li>Zset（sorted set：有序集合）<br> Redis的Zset和Set一样也是String类型元素的结婚，且不允许重复的成员。不同的是每个元素都会关联一个Double类型的分数，redis正是通过分数来为集合中的成员进行从小到大的排序。Zset的成员是唯一的，但分数（score）却可以重复。</li>
+</ol>
+<p><strong>如何获得redis常见数据类型操作命令：<a href="http://redisdoc.com/" target="_blank" rel="noopener"></a></strong></p>
+<h3 id="键（key）"><a href="#键（key）" class="headerlink" title="键（key）"></a>键（key）</h3><p><strong>keys *</strong></p>
+<p>查看数据库中的所有key</p>
+<p><strong>exists key</strong></p>
+<p>判断某个key是否存在</p>
+<p><strong>move key db</strong></p>
+<p>将key移到另一个db中</p>
+<p><strong>expire key 秒钟</strong></p>
+<p>为给定的key设置过期时间，key过期之后会从数据库中移除</p>
+<p><strong>ttl key</strong></p>
+<p>查看还有多少秒国旗，-1表示永不过期，-2表示已过期。</p>
+<p><strong>type key</strong></p>
+<p>查看key是什么类型</p>
+<h3 id="字符串（String）"><a href="#字符串（String）" class="headerlink" title="字符串（String）"></a>字符串（String）</h3><p><strong>set / get / del / append / strlen</strong></p>
+<p>设置key-value，若key已存在则覆盖旧value / 根据key获得value / 往value追加字符串 / 得到value的长度</p>
+<p><strong>incr key / decr key / incrby key / decrby key</strong></p>
+<p>value++ / value– / value += n / value -= n</p>
+<p><strong>getrange key start length / setrange key start string</strong></p>
+<p>获取范围内的字符串 / 将String从start开始覆盖key的value</p>
+<p><strong>setex key time value / setnx key value</strong></p>
+<p>设置key-value的同时指定过期时间 / 设置key-value前先判断key是否存在，若存在则不创建</p>
+<p><strong>mset k1 v1 k2 v2 k3 v3/ mget k1 k2 k3/ msetnx k1 v1 k2 v2 k3 v3</strong></p>
+<p>批量操作，msetnx只要有一个key已存在，则该次批量操作全部失败</p>
+<h3 id="列表（List）"><a href="#列表（List）" class="headerlink" title="列表（List）"></a>列表（List）</h3><p><strong>LPUSH key v1 v2 v3 v4 / RPUSH key v1 v2 v3 v4 / LRANGE</strong></p>
+<p>LPUSH（left push）从头部插入，RPUSH（right push）从尾部插入</p>
+<p><strong>LPOP key / RPOP key</strong></p>
+<p>LPOP取头部的value，RPOP取尾部的value</p>
+<p><strong>LINDEXkey index</strong></p>
+<p>取index位置的value值，index是从头到尾（从左到右）算的</p>
+<p><strong>LLEN key</strong></p>
+<p>返回List长度</p>
+<p><strong>LREM key count value</strong></p>
+<p>删除key中的count个value</p>
+<p><strong>LTRIM key startIndex endIndex</strong></p>
+<p>截取指定范围[start, end]的值然后重新赋给key</p>
+<p><strong>RPOPLPUSH srcKey destKey</strong></p>
+<p>将srcKey中的尾部元素取出，然后从destKey的头部插入</p>
+<p><strong>LSET key index value</strong></p>
+<p>修改key的index位置的值为value</p>
+<p><strong>LINSERT key BEFORE/ AFTERv1 v2 …</strong></p>
+<p>将v2插入到key中的v1值的前面 / 后面</p>
+<p>性能总结：它是一个字符串链表，left、right都可以插入添加。如果键不存在，则创建新的链表。如果键已存在，则新增内容；如果值全部移除，对应的键也就消失了。链表的操作无论是头和尾效率都极高，但假如是对中间元素进行操作，效率就很低了。</p>
+<h3 id="集合（Set）"><a href="#集合（Set）" class="headerlink" title="集合（Set）"></a>集合（Set）</h3><p><strong>SADD key v1 v1 v2 v2 v3 v4</strong></p>
+<p>往key中添加v1、v2、v3、v4，重复元素只会添加一个</p>
+<p><strong>SMEMBERS key</strong></p>
+<p>遍历集合</p>
+<p><strong>SISMEMBER key value</strong></p>
+<p>查询key中是否存在value，存在返回1，不存在返回0</p>
+<p><strong>SCARD key</strong></p>
+<p>获取集合中的元素个数</p>
+<p><strong>SREM key value</strong></p>
+<p>删除key中的value</p>
+<p><strong>SRANDMEMBER key number</strong></p>
+<p>从key中随机找出number个value</p>
+<p><strong>SPOP key</strong></p>
+<p>从key中随机取出一个value</p>
+<p><strong>SMOVE key1 key2 value</strong></p>
+<p>将key1中的value取出并从尾部插入到key2中</p>
+<p><strong>SDIFF key1 key2</strong></p>
+<p>返回在key1里面存在而key2里不存在的value</p>
+<p><strong>SINTER key1 key2</strong></p>
+<p>返回同时存在于key1和key2中的value</p>
+<p><strong>SUNION key1 key2</strong></p>
+<p>返回key1和key2中的所有value，同时会去重</p>
+<h3 id="哈希（Hash）"><a href="#哈希（Hash）" class="headerlink" title="哈希（Hash）"></a>哈希（Hash）</h3><p><strong>HSET key k v / HMSET key k1 v1 k2 v2 / HSETnx key k v</strong></p>
+<p><strong>HGET key k / HMGET key k1 k2 / HGETALL key</strong></p>
+<p><strong>HDEL key k</strong></p>
+<p><strong>HLEN key</strong></p>
+<p><strong>HEXISTS key value</strong>：key中是否有value</p>
+<p><strong>HKEYS key / HVALS key</strong>：单独获得key中的所有key / 单独获得key中的所有value</p>
+<p><strong>HINCRBY key k number / HINCRBYFLOAT key k number</strong>：将key中的k对应的value加number</p>
+<h3 id="有序集合（Zset）"><a href="#有序集合（Zset）" class="headerlink" title="有序集合（Zset）"></a>有序集合（Zset）</h3><p>在Set的基础上，加一个score值。之前的Set是k1 v1 v2 v3，而现在Zset是k1 score v1 score v2 score v3</p>
+<p><strong>ZADD key score v1 score v2 score v3</strong></p>
+<p><strong>ZRANGE key startIndex endIndex</strong>：查询范围内的所有value</p>
+<p><strong>ZRANGE key startIndex endIndex withscores</strong>：查询范围内的所有value并带上score</p>
+<p><strong>ZRANGEBYSCORE key lowerLimit upperLimit</strong>：查询score在[lowerLimit，upperLimit]范围内的value</p>
+<p><strong>ZRANGEBYSCORE key lowerLimit (upperLimit</strong>：查询score在[lowerLimit，upperLimit)范围内的value</p>
+<p><strong>ZRANGEBYSCORE key lowerLimit upperLimit limit index count</strong>：从score在[lowerLimit，upperLimit]范围内的value挑选出index开始的count个元素</p>
+<p><strong>ZREM key value</strong></p>
+<p><strong>ZCARD key</strong>：统计value的个数（不带score）</p>
+<p><strong>ZCOUNT key score1 score2</strong>：统计[score1，score2]区间内的个数</p>
+<p><strong>ZRANK key value</strong>：获得value的下标</p>
+<p><strong>ZSCORE key value</strong>：获得value对应的score</p>
+<p><strong>ZREVRANK key value</strong>：获得value的逆序下标值</p>
+<p><strong>ZREVRANGE key index end</strong>：从index位置逆序输出到end位置</p>
+<p><strong>ZREVRANGEBYSCORE key score1 score2</strong>:</p>
+<h2 id="Redis配置文件"><a href="#Redis配置文件" class="headerlink" title="Redis配置文件"></a>Redis配置文件</h2><p>Units单位</p>
+<p><img src="/2020/08/14/Redis%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20200810214638096.png" alt="image-20200810214638096"></p>
+<p>配置文件的开头定义了一些基本的度量单位，只支持bytes，不支持bit。对大小写不敏感。</p>
+<hr>
+<p><img src="/2020/08/14/Redis%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20200810214755486.png" alt="image-20200810214755486"></p>
+<hr>
+<h2 id="Redis持久化"><a href="#Redis持久化" class="headerlink" title="Redis持久化"></a>Redis持久化</h2><h3 id="RDB（Redis-DataBase）"><a href="#RDB（Redis-DataBase）" class="headerlink" title="RDB（Redis DataBase）"></a>RDB（Redis DataBase）</h3><p>在指定的时间间隔内将内存中的数据集快照写入磁盘，也就是Snapshot快照，它恢复时是将快照文件直接读到内存里。</p>
+<p>Redis会单独创建（fork）一个子进程来进行持久化，会先将数据写入到一个临时文件中，待持久化过程都结束了，再用这个临时文件替换上次持久化好的文件。整个过程中，主进程是不进行任何IO操作的，这就确保了极高的性能。如果需要进行大规模数据的恢复，且对于数据恢复的完整性不是非常敏感，那RDB方式比AOF方式更加高效。RDB的缺点是最后一次持久化后的数据可能丢失。</p>
+<p>fork的作用是复制一个与当前进程一样的进程。新进程的所有数据（变量、环境变量、程序计数器等）数值都和原进程一致，但是是一个全新的进程，并作为原进程的子进程。</p>
+<p>RDB保存的是dump.rdb文件。</p>
+<p>而RDB的保存策略可以在redis的<strong>SNAPSHOTTING</strong>中配置</p>
+<p><img src="/2020/08/14/Redis%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20200810232805689.png" alt="image-20200810232805689"></p>
+<p>可以看到redis会默认设置为：如果在900秒以内有过一次操作、或者300秒内有过10次操作、或者60秒内有过10000次操作，那么就会把内存中的数据保存到dump文件中。</p>
+<p>同时，当执行FLUSHALL或者SHUTDOWN或者SAVE（或BGSAVE）指令的时候，redis都会直接将内存中的数据都存到dump.rdb中。</p>
+<p><strong>save和bgsave的区别：save是只管保存，其他不管，全部阻塞。而执行bgsave指令，redis会在后台异步进行快照操作，快照同时还可以响应客户端请求。可以通过lastsave命令获取最后一次成功执行快照的时间。</strong></p>
+<p><strong>FLUSHALL也会产生dump.rdb文件，但此时的dump.rdb文件是空的，无意义。</strong></p>
+<p>一般来说保存数据的dump.rdb文件，都需要另外再复制一份到别的服务器上，以免本机硬件损坏或者宕机导致dump.rdb文件无法正确恢复。</p>
+<p><strong>RDB的优势和劣势：</strong></p>
+<p>优势：适合大规模的数据恢复，对数据完整性和一致性要求不高。</p>
+<p>劣势：在一定间隔时间做一次备份，所以如果redis意外down的话，就会丢失最后一次快照后的所有修改。另外，Fork的时候，内存中的数据被克隆了一份，大致两倍的膨胀性需要考虑。</p>
+<p><strong>总结：</strong></p>
+<ul>
+<li><p>RDB是一个非常紧凑的文件</p>
+</li>
+<li><p>RDB在保存RDB文件时父进程唯一需要做的就是fork出一个子进程，接下来的工作全部由子进程来做，父进程不需要再做其他IO操作，所以RDB持久化方式可以最大化redis的性能。</p>
+</li>
+<li><p>与AOF相比，在恢复大的数据集的时候，RDB方式会更快一些。</p>
+</li>
+<li><p>数据丢失风险大。</p>
+</li>
+<li><p>RDB需要经常fork子进程来保存数据集到硬盘上，当数据集比较大的时候，fork的过程是非常耗时的，可能会导致redis在一些毫秒级情况下不能响应客户端的请求。</p>
+</li>
+<li><p>当rdb文件出现错误时，可以使用以下指令来修复dump.rdb文件</p>
+<blockquote>
+<p>redis-check-rdb –fix dump.rdb</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="AOF（Append-Only-File）"><a href="#AOF（Append-Only-File）" class="headerlink" title="AOF（Append Only File）"></a>AOF（Append Only File）</h3><p><strong>以日志的形式来记录每个写操作</strong>，将redis执行过的所有写指令记录下来（读操作不记录），只许追加文件但不可以改写文件，redis启动之初会读取该文件重新构建数据，换言之，redis重启的话就根据日志文件的内容将写指令从前到后执行一次以完成数据的恢复工作。</p>
+<p><img src="/2020/08/14/Redis%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20200811001004741.png" alt="image-20200811001004741"></p>
+<p><strong>注意：</strong></p>
+<ol>
+<li><p>FLUSHALL也属于写操作，所以在一系列的写操作之后，执行了FLUSHALL指令，那么FLUSHALL指令也会写入到aof文件中，也就意味着，当下一次启动redis的时候，FLUSHALL指令前的写操作虽然都会执行一遍，但是最后都会被FLUSHALL指令全部清除。</p>
+</li>
+<li><p>当RDB和AOF同时开启的时候，redis启动默认加载aof文件，如果此时aof文件出现错误（有时会因为网络延迟、丢包等等问题造成有一条写操作没有完整写入.aof文件中），那么redis服务将无法启动。</p>
+</li>
+<li><p>当aof文件出现错误的时候，可以执行以下指令来修复.aof文件</p>
+<blockquote>
+<p>redis-check-aof –fix appendonly.aof</p>
+</blockquote>
+</li>
+</ol>
+<p><strong>AOF的参数配置：</strong></p>
+<ol>
+<li>appendonly</li>
+<li>appendfilename</li>
+<li>Appendfsync：<ol>
+<li>Always：同步持久化，每次发生数据变更就会被立即记录到磁盘，性能较差但数据完整性较好</li>
+<li>Everysec：出厂默认推荐，异步操作，每秒记录，如果一秒内宕机，会有数据丢失。</li>
+<li>No</li>
+</ol>
+</li>
+<li>No-appendfsync-on-rewrite：重写时是否可以运用Appendfsync，用默认no即可，保证数据安全性。</li>
+<li>Auto-aof-rewrite-min-size：设置重写的基准值</li>
+<li>Auto-aof-rewrite-percentage：设置重写的基准值</li>
+</ol>
+<p><strong>Rewrite：</strong><br>AOF采用文件追加方式，文件会越来越大，为了避免出现此种情况，新增了重写机制，当aof文件的大小超过所设定的阈值时，redis就会启动aof文件的内容压缩，只保留可以恢复数据的最小指令集，可以使用命令bgrewriteaof。</p>
+<p><strong>重写原理：</strong><br>aof文件持续增长而过大时，会fork出一条新进程来将文件重写（也是先写临时文件最后再rename），遍历新进程的内存中的数据，每条记录有一条Set语句。重写aof文件的操作，并没有读取旧的aof文件，而是将整个内存中的数据库内容用命令的方式重写了一个新的aof文件，这点和快照有点类似。</p>
+<p><strong>触发机制：</strong><br>redis惠会记录上次重写时的aof文件的大小，默认配置是当aof文件大小是上次rewrite后大小的一倍且文件大于64M时触发。可以通过Auto-aof-rewrite-min-size来修改这个阈值。</p>
+<p><img src="/2020/08/14/Redis%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20200811004812156.png" alt="image-20200811004812156"></p>
+<p><strong>AOF的优势：Appendfsync可以每秒追加，宕机的时候只会丢失一秒内的数据。</strong></p>
+<p><strong>AOF的劣势：相同数据集的数据，aof文件要远大于rdb文件，恢复速度比RDB慢。AOF的运行效率也要慢于RDB，每秒同步策略效率较好，不同步效率与RDB相同。</strong></p>
+<p><strong>总结：</strong></p>
+<ul>
+<li>AOF文件是一个只进行追加的日志文件</li>
+<li>redis可以在AOF文件体积变得过大时，自动地在后台对aof文件进行重写</li>
+<li>aof文件有序地保存了对数据库执行的所有写入操作，这些写入操作一redis协议的格式保存，因此aof文件的内容非常容易被人读懂，对文件进行分析也很轻松</li>
+<li>对于相同的数据集来说，aof文件的体积通常要大于rdb文件的体积</li>
+<li>根据所使用的的fsync策略，AOF的速度可能会慢于RDB</li>
+</ul>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><ol>
+<li>RDB持久化方式能够在指定的时间间隔对数据进行快照存储</li>
+<li>AOF持久化方式记录每次对服务器的写操作，当服务器重启的时候回重新执行这些命令来恢复原始数据，AOF命令以redis协议追加保存每次写操作到文件末尾。redis还能对aof文件进行后台重写，是的aof文件的体积不至于过大。</li>
+<li>只做缓存：如果只希望数据在服务器运行的时候存在，也可以不使用任何持久化方式</li>
+<li>官网建议同时开启两种持久化方式，在这种情况下，当redis重启时会优先载入aof文件来恢复数据。因为在通常情况下aof文件保存的数据集要比rdb文件保存的数据集完整。RDB的数据不实时，同时使用两者时，服务器重启也只会找aof文件。那要不要只使用AOF呢？建议不要，因为RDB更适合用于备份数据库（AOF在不断变化不好备份），快速重启，而且不会有AOF可能存在的bug，留着作为一个万一的手段。</li>
+<li>性能建议：因为rdb文件只用作后备用途，建议只在Slave上持久化rdb文件，而且只要15分钟备份一次就好了，只保留save 900 1 这条规则。<br> 如果enable AOF。好处是在最恶劣的情况下也只会丢失不超过两秒的数据，启动脚本较简单，只load自己的aof文件就可以了。代价一是带来了持续的IO，二是AOF Rewrite的最后将rewrite的过程中产生的新数据写到新文件造成的阻塞几乎是不可避免的。只要硬盘许可，应该尽量减少AOF Rewrite的频率，AOF重写的基础大小默认值64M太小了，可以设到5G以上。默认超过原大小100%时重写可以改到适当的数值。<br> 如果不enable AOF，仅靠master-Slave Replication实现高可用性也可以，这样能省掉一大笔IO也减少了rewrite时带来的系统波动。代价是如果master和Slave同时倒掉，会丢失十几分钟的数据，启动脚本也要比较master和Slave中的rdb文件，载入较新的那个。</li>
+</ol>
+<h2 id="Redis事务"><a href="#Redis事务" class="headerlink" title="Redis事务"></a>Redis事务</h2><p>Redis事务可以一次执行多个命令，本质是一组命令的集合。一个事务中的所有命令都会序列化，<strong>按顺序地串行化执行而不会被其他命令插入，不许加塞。</strong></p>
+<p><strong>Redis事务命令：</strong></p>
+<ol>
+<li>DISCARD：取消事务，放弃执行事务块内的所有命令。</li>
+<li>EXEC：执行事务块内的所有命令。</li>
+<li>MULTI：标记一个事务块的开始。</li>
+<li>UNWATCH：取消WATCH命令对所有key的监视。</li>
+<li>WATCH：监视一个（或多个）key，如果在事务执行之前这个（这些）key被其他命令所改动过，那么事务将被打断。</li>
+</ol>
+<p><strong>事务在执行后，有以下几种情况：</strong></p>
+<ol>
+<li><p>执行成功，那么队列中的所有操作都生效。</p>
+</li>
+<li><p>在队列中，有一条语句是在其本身执行的时候就已经报错了。此时事务执行后，由于队列中有一个显示的报错，所以这次事务的所有操作都不会生效。</p>
+</li>
+<li><p>在队列中，有一条语句成功加入了队列，但是却无法成功执行的，比如给一个字符串做+1的操作（incr k1)，那么此时，该操作并不会报错，而会加入事务队列中。所以此次事务执行会成功，并且除了以上提到的字符串+1操作的语句无法成功执行外，其他语句会全部执行成功。</p>
+</li>
+<li><p>WATCH监视。事务提交时，如果WATCH监视的key的值已经在事务提交前被修改过，那么此次事务提交不会成功，同时返回nil应答以通知调用者事务执行失败。</p>
+</li>
+</ol>
+<p>Redis事务的三特性：</p>
+<ol>
+<li>单独的隔离操作：事务中的所有命令都会序列化、按顺序地执行。事务在执行过程中，不会被其他客户端发来的命令请求所打断。</li>
+<li>没有隔离界别的概念：队列中的命令在事务没有提交之前都不会实际地被执行，也正是因为事务提交前任何指令都不会被实际执行，所以也就不存在“事务内的查询要看到事务里的更新，在事务外查询不能看到”这个问题。</li>
+<li>不保证原子性：redis同一个事务中如果有一条命令执行失败（失败不是出错），其他命令仍然会被执行，没有回滚。</li>
+</ol>
+<h2 id="Redis消息订阅发布"><a href="#Redis消息订阅发布" class="headerlink" title="Redis消息订阅发布"></a>Redis消息订阅发布</h2><p>Redis的发布订阅是进程间的一种消息通信模式：发送者（pub）发送消息，订阅者（sub）接受消息。</p>
+<h2 id="Redis主从复制"><a href="#Redis主从复制" class="headerlink" title="Redis主从复制"></a>Redis主从复制</h2><p>主机数据更新后根据配置和策略，自动同步到备机的master / slave机制，Master以写为主，Slave以读为主。</p>
+<p>从库配置：每次与master断开之后，都需要重新连接，除非配置紧redis.conf文件。</p>
+<hr>
+<p><strong>常用的主从复制策略：</strong></p>
+<ol>
+<li><p>一主二从（一个Master两个Slave）</p>
+<ol>
+<li>主机shutdown之后，两个从机都不会断开与Master的连接，会一直等待Master重新上线。</li>
+<li>从机每次Slaveof都会先把主机从头到尾的数据全部复制一遍。</li>
+<li>如果从机中途断线，就与Master断开了连接，那么再次启动之后就需要重新Slaveof主机。</li>
+<li>从机只能读，不能写。</li>
+</ol>
+</li>
+<li><p>薪火相传</p>
+<ol>
+<li>上一个Slave可以是下一个Slave的Master，Slave同样可以接收其他Slaves的连接和同步请求，那么该Slave作为了链条中下一个的Master，可以有效减轻Master的写压力。</li>
+<li>中途变更转向，会清除之前的数据，重新拷贝最新的。</li>
+</ol>
+</li>
+<li><p>反客为主<br> 通过Slave no one 指令使当前的从机停止与其他数据库的同步，转成主数据库。</p>
+</li>
+<li><p><strong>哨兵模式（反客为主的自动版）：能在后台监控主机是否故障，如果主机发生故障则根据投票数自动将从库转换为主库。原先的主机发生故障后如果故障修复，然后重新上线，那么哨兵会将其自动转换为从机，连接到最新的一台主机（这个过程在主机重新启动后可能需要一点时间）。具体实现步骤如下：</strong></p>
+<ol>
+<li><p>在自定义的/myredis/目录下新建 sentinel.conf 文件，名字不能错。</p>
+</li>
+<li><p>配置 sentinel.conf 文件：</p>
+<blockquote>
+<p>sentinel monitor 被监控的主机的名字（随意起） 127.0.0.1 6379 1</p>
+</blockquote>
+<p> 127.0.0.1可以更换成IP地址，6379则是主机的端口号，1表示在主机故障后，哪个从机的票数大于1，哪个从机就会变成主机。</p>
+</li>
+<li><p>启动哨兵</p>
+<blockquote>
+<p>./redis-sentinel /home/myredis/sentinel.conf</p>
+</blockquote>
+</li>
+<li><p>哨兵会在主机故障后自动发起投票，根据配置文件中的投票数，选出投票数大于该阈值的从机，如果有多个从机的投票数大于该阈值且投票数都相同，那么哨兵会重新发起投票，直到有一个从机成为主机为止。</p>
+</li>
+</ol>
+</li>
+</ol>
+<hr>
+<p><strong>复制原理：</strong></p>
+<ol>
+<li>slave启动成功连接到master够会发送一个sync命令，master接收到命令后启动后台的存盘进程，同时收集所有接收到的用于修改数据集的命令，在后台进程执行完毕之后，master将传送整个数据文件到slave，以完成一次完全同步。</li>
+<li>全量复制：slave在首次接收到主数据库文件的数据后，将其存盘并加载到内存中。只要是重新连接master，一次完全同步（全量复制）将被自动执行。</li>
+<li>增量复制：master继续将新的所有收集到的修改命令依次传给slave，以完成同步。</li>
+</ol>
+<p><strong>复制的缺点：</strong><br>        由于所有的写操作都是先在Master上操作，然后同步更新到Slave，所以从Master同步到Slave机器有一定的延迟。当系统很繁忙的时候，延迟问题会更加严重，Slave机器数量的增加也会使这个问题更加严重。</p>
+<h2 id="测试联通性"><a href="#测试联通性" class="headerlink" title="测试联通性"></a>测试联通性</h2><p>在Windows下打开IDEA，导入依赖的jar包</p>
+<blockquote>
+<p>jedis-3.3.0.jar</p>
+<p>commons-pool-1.6.jar</p>
+</blockquote>
+<p>测试是否连接成功：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">      Jedis jedis = <span class="keyword">new</span> Jedis(<span class="string">"redis主机IP地址"</span>, <span class="number">6379</span>);</span><br><span class="line">      System.out.println(jedis.ping());</span><br><span class="line">   &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果此时报异常：<strong>java.net.SocketTimeoutException: connect timed out</strong></p>
+<p>那么需要在redis.conf配置文件中，找到bind 127.0.0.1，将其用#注释掉：</p>
+<p><img src="/2020/08/14/Redis%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20200811173818366.png" alt="image-20200811173818366"></p>
+<p>同时，如果redis未开启Redis认证密码，则需要将保护模式改为no：</p>
+<p><img src="/2020/08/14/Redis%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-20200811173816539.png" alt="image-20200811173816539"></p>
+<p>此时就可以连接上Redis了。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/08/14/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89/" rel="next" title="多线程学习笔记（二）">
+                <i class="fa fa-chevron-left"></i> 多线程学习笔记（二）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/08/14/IO%E6%B5%81/" rel="prev" title="IO流">
+                IO流 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="hgx98" />
+            
+              <p class="site-author-name" itemprop="name">hgx98</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%20%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Redis"><span class="nav-text">Redis</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#NoSQL入门和概述"><span class="nav-text">NoSQL入门和概述</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#入门概述"><span class="nav-text">入门概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NoSQL数据模型简介"><span class="nav-text">NoSQL数据模型简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NoSQL数据库的四大分类"><span class="nav-text">NoSQL数据库的四大分类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在分布式数据库中CAP原理CAP-BASE"><span class="nav-text">在分布式数据库中CAP原理CAP+BASE</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Redis入门介绍"><span class="nav-text">Redis入门介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#入门概述-1"><span class="nav-text">入门概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Redis安装"><span class="nav-text">Redis安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Redis启动后杂项基础知识"><span class="nav-text">Redis启动后杂项基础知识</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Redis数据类型"><span class="nav-text">Redis数据类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#键（key）"><span class="nav-text">键（key）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字符串（String）"><span class="nav-text">字符串（String）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#列表（List）"><span class="nav-text">列表（List）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#集合（Set）"><span class="nav-text">集合（Set）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#哈希（Hash）"><span class="nav-text">哈希（Hash）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#有序集合（Zset）"><span class="nav-text">有序集合（Zset）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Redis配置文件"><span class="nav-text">Redis配置文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Redis持久化"><span class="nav-text">Redis持久化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#RDB（Redis-DataBase）"><span class="nav-text">RDB（Redis DataBase）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AOF（Append-Only-File）"><span class="nav-text">AOF（Append Only File）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-text">总结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Redis事务"><span class="nav-text">Redis事务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Redis消息订阅发布"><span class="nav-text">Redis消息订阅发布</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Redis主从复制"><span class="nav-text">Redis主从复制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#测试联通性"><span class="nav-text">测试联通性</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">hgx98</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

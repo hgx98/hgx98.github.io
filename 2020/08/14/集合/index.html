@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="集合集合数组都是对多个数据进行存储操作的结构，简称Java容器 数组的弊端：  一旦初始化后，长度就不可变 插入删除添加数据等操作非常不便，效率也不高 获取数组实际元素的个数的需求，数组没有现成的属性或方法可用 数组存储数据的特点：有序、可重复。对于无序不可重复的需求不能满足  Collection接口常用方法 add(Object obj);  addAll(Collection c);  in">
+<meta property="og:type" content="article">
+<meta property="og:title" content="集合">
+<meta property="og:url" content="http://yoursite.com/2020/08/14/%E9%9B%86%E5%90%88/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="集合集合数组都是对多个数据进行存储操作的结构，简称Java容器 数组的弊端：  一旦初始化后，长度就不可变 插入删除添加数据等操作非常不便，效率也不高 获取数组实际元素的个数的需求，数组没有现成的属性或方法可用 数组存储数据的特点：有序、可重复。对于无序不可重复的需求不能满足  Collection接口常用方法 add(Object obj);  addAll(Collection c);  in">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://yoursite.com/2020/08/14/%E9%9B%86%E5%90%88/image-20200804230735911.png">
+<meta property="og:image" content="http://yoursite.com/2020/08/14/%E9%9B%86%E5%90%88/image-20200804230359748.png">
+<meta property="og:image" content="http://yoursite.com/2020/08/14/%E9%9B%86%E5%90%88/image-20200804230540984.png">
+<meta property="og:image" content="http://yoursite.com/2020/08/14/%E9%9B%86%E5%90%88/image-20200804231156454.png">
+<meta property="og:image" content="http://yoursite.com/2020/08/14/%E9%9B%86%E5%90%88/image-20200804232137930.png">
+<meta property="og:image" content="http://yoursite.com/2020/08/14/%E9%9B%86%E5%90%88/image-20200804232259276.png">
+<meta property="article:published_time" content="2020-08-14T15:59:03.000Z">
+<meta property="article:modified_time" content="2020-08-14T15:59:12.953Z">
+<meta property="article:author" content="hgx98">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/2020/08/14/%E9%9B%86%E5%90%88/image-20200804230735911.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/08/14/集合/"/>
+
+
+
+
+
+  <title>集合 | Hexo</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/14/%E9%9B%86%E5%90%88/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="hgx98">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">集合</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-08-14T23:59:03+08:00">
+                2020-08-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="集合"><a href="#集合" class="headerlink" title="集合"></a>集合</h1><p>集合数组都是对多个数据进行存储操作的结构，简称Java容器</p>
+<p>数组的弊端：</p>
+<ul>
+<li>一旦初始化后，长度就不可变</li>
+<li>插入删除添加数据等操作非常不便，效率也不高</li>
+<li>获取数组实际元素的个数的需求，数组没有现成的属性或方法可用</li>
+<li>数组存储数据的特点：有序、可重复。对于无序不可重复的需求不能满足</li>
+</ul>
+<h1 id="Collection接口常用方法"><a href="#Collection接口常用方法" class="headerlink" title="Collection接口常用方法"></a>Collection接口常用方法</h1><ol>
+<li><p>add(Object obj);</p>
+</li>
+<li><p>addAll(Collection c);</p>
+</li>
+<li><p>int size();</p>
+</li>
+<li><p>void clear();</p>
+</li>
+<li><p>boolean isEmpty();</p>
+</li>
+<li><p>boolean contains(Object obj);</p>
+</li>
+<li><p>boolean containsAll(Collection c);</p>
+</li>
+<li><p>boolean remove(Object obj);</p>
+</li>
+<li><p>boolean removeAll(Collection c);</p>
+</li>
+<li><p>boolean retainAll(Collection c);把交集的结果存到当前集合中，不影响c</p>
+</li>
+<li><p>boolean equals(Object obj);</p>
+</li>
+<li><p>Object[] toArray();</p>
+</li>
+<li><p>hashCode();</p>
+</li>
+<li><p>iterator();</p>
+</li>
+</ol>
+<h1 id="循环遍历集合"><a href="#循环遍历集合" class="headerlink" title="循环遍历集合"></a>循环遍历集合</h1><p>JDK5.0 新增了增强for循环，底层仍然是用迭代器实现的。一开始会先获取数组的长度size，每次迭代的时候会判断当前游标cursor是否等于size，从而决定是否继续遍历。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (Object obj : collection) &#123;</span><br><span class="line">    obj = <span class="keyword">new</span> ...;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>对于增强for循环中，对数据obj的修改，不会影响到原集合或数组的元素。因为增强for循环是将数组或集合中的对应位置的元素赋值给obj，obj属于新的变量，所以obj的修改不会影响到原数据。</p>
+<h1 id="List接口"><a href="#List接口" class="headerlink" title="List接口"></a>List接口</h1><ul>
+<li>ArrayList</li>
+<li>LinkedList</li>
+<li>vector</li>
+</ul>
+<p>三者的异同？</p>
+<p>三个类都实现了List接口，存储数据的特点相同，都是有序的、可重复的。</p>
+<h2 id="ArrayList源码分析"><a href="#ArrayList源码分析" class="headerlink" title="ArrayList源码分析"></a>ArrayList源码分析</h2><p>JDK 7</p>
+<p>底层用一个Object数组实现</p>
+<p>空参构造器初始化时默认新建长度是10的Object数组，类似于饿汉式</p>
+<p>如果原来的数组长度容量不够了，则默认扩容为原来长度的1.5倍，扩容后会将旧数组的所有数据copy到新数组中，并往新数组中添加元素</p>
+<p>JDK 8中在第一次添加元素的时候，才创建数组。底层Object数组会初始化为{}， 并没有创建长度为10的数组，类似于懒汉式</p>
+<p><strong>ArrayList查询速度快是因为底层是数组，也就是在内存中一片连续的空间，这就意味着可以根据数组的首地址+偏移量，直接计算出想访问的第index个元素在内存中的位置。</strong></p>
+<h2 id="LinkedList源码分析"><a href="#LinkedList源码分析" class="headerlink" title="LinkedList源码分析"></a>LinkedList源码分析</h2><p>LinkedList底层是双向链表。在其内部定义了一个内部类Node&lt;E&gt;，双向节点。</p>
+<h2 id="Vector源码分析"><a href="#Vector源码分析" class="headerlink" title="Vector源码分析"></a>Vector源码分析</h2><p>不管是JDK7还是JDK8，数组都会初始化的时候创建一个长度为10的数组，在扩容时默认扩容为原来数组长度的两倍。add方法加上了synchronized所以是线程安全的。</p>
+<h1 id="List接口常用方法"><a href="#List接口常用方法" class="headerlink" title="List接口常用方法"></a>List接口常用方法</h1><ol>
+<li>void add(int index, Object ele);</li>
+<li>boolean addAll(int index, Collection else);</li>
+<li>Object get(int index);</li>
+<li>int indexOf(Object obj);</li>
+<li>int lastIndexOf(Object obj);</li>
+<li>Object remove(int index);如果想删除集合中的指定对象，可以使用remove(new Integer(2));</li>
+<li>Object set(int index, Object ele);</li>
+<li>List subList(int fromIndex, int toIndex);</li>
+</ol>
+<h1 id="Set接口"><a href="#Set接口" class="headerlink" title="Set接口"></a>Set接口</h1><p>存储无序的（不等于随机性）、不可重复的数据。Set接口没有额外定义的新方法，使用的是Collection中的方法</p>
+<ul>
+<li>HashSet：线程不安全的，可以存储null值<ul>
+<li>LinkedHashSet：存取有序，取出来的数据顺序跟存的顺序一致</li>
+</ul>
+</li>
+<li>TreeSet：可以按照添加对象的指定属性进行排序。向TreeSet中添加的数据要求是同一个类提供的，对于自定义类，有两种排序方式：自然排序（实现Comparable接口的compareTo()方法）和定制排序。<br>  在自然排序中，比较两个对象是否相同的标准为compareTo()是否返回0，而不再是equals()<br>  在定制排序中，比较两个对象是否相同的标准为compare()是否返回0，而不再是equals()</li>
+</ul>
+<h2 id="HashSet添加元素过程"><a href="#HashSet添加元素过程" class="headerlink" title="HashSet添加元素过程"></a>HashSet添加元素过程</h2><p>向HashSet中添加元素a，首先调用a所在类的hashCode()方法，计算a的哈希值，此哈希值接着通过某种算法计算出在HashSet底层数组中的存放位置，然后判断此位置上是否已经有元素，</p>
+<p>如果没有，则将元素a添加到此处；</p>
+<p>如果有其他元素b（或以链表形式存在多个元素），则比较a与b的hash值，如果hash值不同，则添加元素a成功。如果哈希值不同，进而需要调用a所在类的equals()方法，如果equals方法返回true，元素a添加失败，否则添加成功。</p>
+<p>HashSet对于添加的元素位于同样的位置，会以链表的方式在该位置存储，在JDK7中，新添加的元素以头插法插入链表，JDK8以尾插法插入链表</p>
+<p>HashSet底层是HashMap，当new HashSet时，底层是调用new HashMap</p>
+<p>只不过HashSet只存储HashMap的key值，value值不关心。</p>
+<h1 id="Map接口"><a href="#Map接口" class="headerlink" title="Map接口"></a>Map接口</h1><ul>
+<li>HashMap：线程不安全，可以存储null的key和value。JDK7及之前底层是数组+链表，JDK8之后是数组+链表+红黑树<ul>
+<li>LinkedHashMap：保证在遍历Map集合时，可以按照添加的顺序遍历</li>
+</ul>
+</li>
+<li>TreeMap：保证按照添加的key-value对进行排序，实现排序遍历。此时考虑key的自然排序或定制排序。底层使用红黑树。</li>
+<li>Hashtable：线程安全，不能存储null的key和value<ul>
+<li>Properties：常用来处理配置文件，key和value都是String类型</li>
+</ul>
+</li>
+</ul>
+<h2 id="HashMap（JDK7）"><a href="#HashMap（JDK7）" class="headerlink" title="HashMap（JDK7）"></a>HashMap（JDK7）</h2><h3 id="底层原理"><a href="#底层原理" class="headerlink" title="底层原理"></a>底层原理</h3><p>Map map = new HashMap();<br>该语句在实例化以后，底层创建了一个长度是16的一维数组Entry[] table;</p>
+<p>map.put(key, value);<br>首先，调用key所在类的hashCode()计算key的哈希值，此哈希值经过某种算法（在HashMap JDK7源码中是：要插入的key的哈希值 &amp; (当前map的容量 - 1)）计算以后，得到在Entry数组中的存放位置。</p>
+<ol>
+<li>如果此位置上数据为空，那么key-value添加成功；</li>
+<li>如果此位置上数据不为空（意味着此位置上存在一个或多个数据），比较key和已经存在的一个或多个数据的哈希值，如果都不相同，此时key-value添加成功；如果key的哈希值和已经存在的某一个数据的哈希值相同，那么就会调用key所在类的equals方法，如果equals放回false，那么key-value添加成功 ；如果返回true，则使用value去替换该数据的value，key不变。</li>
+</ol>
+<p>对于要插入的位置存在数据的情况，那么新的key-value会以<strong>头插法</strong>插入链表</p>
+<p>在不断的添加过程中，会涉及到扩容问题，默认每次扩容原来容量的2倍，并将原有的数据复制过来，数据复制过去的时候，由于map长度不同，原各个元素的存放位置可能会发生变化。</p>
+<h3 id="源码分析"><a href="#源码分析" class="headerlink" title="源码分析"></a>源码分析</h3><p>HashMap源码中重要的常量：</p>
+<ol>
+<li><strong>DEFAULT_INITIAL_CAPACITY：</strong>HashMap的默认容量：16</li>
+<li><strong>MAXIMUM_CAPACITY：</strong>HashMap的最大支持容量，2^30</li>
+<li><strong>DEFAULT_LOAD_FACTOR：</strong>HashMap的默认加载因子</li>
+<li><strong>TREEIFY_THRESHOLD：</strong>Bucket中链表长度大于该默认值，转化为红黑树</li>
+<li><strong>UNTREEIFY_THRESHOLD：</strong>Bucket中红黑树存储的Node小于该默认值，转化为链表</li>
+<li><strong>MIN_TREEIFY_CAPACITY：</strong>桶中的Node被树化时最小的hash表容量。（当桶中Node的数量大到需要变红黑树时若hash表容量小于MIN_TREEIFY_CAPACITY，此时应执行resize扩容操作这个MIN_TREEIFY_CAPACITY的值至少是TREEIFY_THRESHOLD的4倍）。</li>
+<li><strong>table：</strong>存储元素的数组，长度总是2的n次幂</li>
+<li><strong>entrySet：</strong>存储具体元素的集</li>
+<li><strong>size：HashMap</strong>中存储的键值对的数量</li>
+<li><strong>modCount：</strong>HashMap扩容和结构改变的次数</li>
+<li><strong>threshold：扩容的临界值，其值等于（容量 * 填充因子），当map中的元素个数大于该值且新插入的key-value的位置上已经有数据时，map就会进行扩容，而不是元素的个数大于map的容量的时候。</strong></li>
+<li><strong>loadFactor：</strong>填充因子</li>
+</ol>
+<p><img src="/2020/08/14/%E9%9B%86%E5%90%88/image-20200804230735911.png" alt="image-20200804230735911"></p>
+<h2 id="HashMap（JDK8）"><a href="#HashMap（JDK8）" class="headerlink" title="HashMap（JDK8）"></a>HashMap（JDK8）</h2><h3 id="底层原理-1"><a href="#底层原理-1" class="headerlink" title="底层原理"></a>底层原理</h3><p>JDK8相较于JDK7在底层方面的不同：</p>
+<ol>
+<li>new HashMap(); 在底层没有创建一个长度为16的数组</li>
+<li>JDK8底层的数组是Node[]，而非Entry[]</li>
+<li>首次调用map.put()方法时，底层创建长度为16的数组</li>
+<li>JDK7中底层结构只有数组+链表，JDK8中是数组+链表+红黑树。当数组的某一个索引位置上的元素个数超过了8个（不包括8个）且当前数组长度超过了64，此时此索引位置上的所有数据改用红黑树存储。</li>
+</ol>
+<h3 id="源码分析-1"><a href="#源码分析-1" class="headerlink" title="源码分析"></a>源码分析</h3><p><img src="/2020/08/14/%E9%9B%86%E5%90%88/image-20200804230359748.png" alt="image-20200804230359748"></p>
+<p>调用HashMap的空参方法，会先给loadFactor加载因子赋值0.75，并没有创建数组</p>
+<hr>
+<p><img src="/2020/08/14/%E9%9B%86%E5%90%88/image-20200804230540984.png" alt="image-20200804230540984"></p>
+<p>数组是Node&lt;K, V&gt;[] table;</p>
+<hr>
+<p><img src="/2020/08/14/%E9%9B%86%E5%90%88/image-20200804231156454.png" alt="image-20200804231156454"></p>
+<p>在首次调用put的时候，会调用resize方法，此时会新建一个长度会16的数组</p>
+<hr>
+<p><img src="/2020/08/14/%E9%9B%86%E5%90%88/image-20200804232137930.png" alt="image-20200804232137930"></p>
+<p>在某个索引位置的节点超过8之后，会考虑是否将链表改为红黑树</p>
+<p><img src="/2020/08/14/%E9%9B%86%E5%90%88/image-20200804232259276.png" alt="image-20200804232259276"></p>
+<p>可以看到是否转成红黑树还有一个条件是当前map的长度是否大于MIN_TREEIFY_CAPACITY=64，大于则转红黑树，否则就进行扩容。</p>
+<p>map扩容的临界值，当节点个数达到临界值时就需要考虑是否扩容：</p>
+<p>如果新元素插入的位置上没有数据，那么则不会扩容，否则进行扩容，而不需等到数组满的时候才扩容，这种机制是因为有可能新插入的元素永远填不满数组，每个插入的新元素都插到了链表中。而我们应当尽可能地减少链表的长度。</p>
+<h1 id="Map遍历"><a href="#Map遍历" class="headerlink" title="Map遍历"></a>Map遍历</h1><h2 id="第一种"><a href="#第一种" class="headerlink" title="第一种"></a>第一种</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Map map = <span class="keyword">new</span> HashMap();</span><br><span class="line">        map.put(<span class="string">"A"</span>,<span class="number">123</span>);</span><br><span class="line">        map.put(<span class="string">"B"</span>,<span class="number">22</span>);</span><br><span class="line">        map.put(<span class="string">"C"</span>,<span class="number">52</span>);</span><br><span class="line">        </span><br><span class="line">        Set set = map.keySet();</span><br><span class="line">        Iterator iterator = set.iterator();</span><br><span class="line">        <span class="keyword">while</span> (iterator.hasNext()) &#123;</span><br><span class="line">            Object key = iterator.next();</span><br><span class="line">            System.out.println(key + map.get(key));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="第二种"><a href="#第二种" class="headerlink" title="第二种"></a>第二种</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Map map = <span class="keyword">new</span> HashMap();</span><br><span class="line">        map.put(<span class="string">"A"</span>,<span class="number">123</span>);</span><br><span class="line">        map.put(<span class="string">"B"</span>,<span class="number">22</span>);</span><br><span class="line">        map.put(<span class="string">"C"</span>,<span class="number">52</span>);</span><br><span class="line">        </span><br><span class="line">        Collection values = map.values();</span><br><span class="line">        <span class="keyword">for</span> (Object value : values) &#123;</span><br><span class="line">            System.out.println(value);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="第三种"><a href="#第三种" class="headerlink" title="第三种"></a>第三种</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Map map = <span class="keyword">new</span> HashMap();</span><br><span class="line">        map.put(<span class="string">"A"</span>,<span class="number">123</span>);</span><br><span class="line">        map.put(<span class="string">"B"</span>,<span class="number">22</span>);</span><br><span class="line">        map.put(<span class="string">"C"</span>,<span class="number">52</span>);</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span> (Map.Entry&lt;Object, Object&gt; entry ; map.entrySet()) &#123;</span><br><span class="line">            System.out.println(entry.getKey() + <span class="string">" --&gt; "</span> + entry.getValue());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+<h1 id="Collections工具类"><a href="#Collections工具类" class="headerlink" title="Collections工具类"></a>Collections工具类</h1><p>排序</p>
+<ol>
+<li>reverse(List)：</li>
+<li>shuffle(List)：对List集合进行随机排序</li>
+<li>sort(List)：</li>
+<li>sort(List, Comparator)：</li>
+<li>swap(List, int i, int j)：将制定List集合中的i处元素和j处元素进行交换</li>
+</ol>
+<p>替换、查找</p>
+<ol>
+<li>Object max(Collection)：根据元素的自然顺序，返回给定集合中的最大元素</li>
+<li>Object max(Collection, Comparator)：根据Comparator指定的顺序返回给定集合中的最大元素</li>
+<li>Object min(Collection)</li>
+<li>Object min(Collection, Comparator)</li>
+<li>int frequency(Collection, Object)：返回指定集合中指定元素出现的次数</li>
+<li>void copy(List dest, List src)：将src中的内容复制到dest中</li>
+<li>boolean replaceAll(List list, Object oldVal, Object newVal)：使用新值替换List</li>
+</ol>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/08/14/IO%E6%B5%81/" rel="next" title="IO流">
+                <i class="fa fa-chevron-left"></i> IO流
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="hgx98" />
+            
+              <p class="site-author-name" itemprop="name">hgx98</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%20%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#集合"><span class="nav-text">集合</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Collection接口常用方法"><span class="nav-text">Collection接口常用方法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#循环遍历集合"><span class="nav-text">循环遍历集合</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#List接口"><span class="nav-text">List接口</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#ArrayList源码分析"><span class="nav-text">ArrayList源码分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LinkedList源码分析"><span class="nav-text">LinkedList源码分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Vector源码分析"><span class="nav-text">Vector源码分析</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#List接口常用方法"><span class="nav-text">List接口常用方法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Set接口"><span class="nav-text">Set接口</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#HashSet添加元素过程"><span class="nav-text">HashSet添加元素过程</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Map接口"><span class="nav-text">Map接口</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#HashMap（JDK7）"><span class="nav-text">HashMap（JDK7）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#底层原理"><span class="nav-text">底层原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#源码分析"><span class="nav-text">源码分析</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HashMap（JDK8）"><span class="nav-text">HashMap（JDK8）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#底层原理-1"><span class="nav-text">底层原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#源码分析-1"><span class="nav-text">源码分析</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Map遍历"><span class="nav-text">Map遍历</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#第一种"><span class="nav-text">第一种</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第二种"><span class="nav-text">第二种</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第三种"><span class="nav-text">第三种</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Collections工具类"><span class="nav-text">Collections工具类</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">hgx98</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
